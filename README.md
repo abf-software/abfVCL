@@ -11,7 +11,7 @@ It contains more than 60 components and controls for different purposes.
 
 
 ## How to install?
-Run the installation program [abfVCLInstall.exe](https://github.com/abf-software/abfVCL/blob/main/abfVCLInstall.exe) 
+Run the installation program [abfVCLInstall.exe](https://github.com/abf-software/abfVCL/raw/main/abfVCLInstall.exe) 
 and follow step-by-step instructions. 
 After installation components would appear in the Delphi/C++Builder IDE. 
 
