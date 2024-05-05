@@ -11,16 +11,20 @@ It contains more than 60 components and controls for different purposes.
 
 
 ## How to install?
-Run the installation program `abfVCLInstall.exe` and follow step-by-step instructions. 
+Run the installation program [abfVCLInstall.exe](https://github.com/abf-software/abfVCL/blob/main/abfVCLInstall.exe) 
+and follow step-by-step instructions. 
 After installation components would appear in the Delphi/C++Builder IDE. 
 
+
 Also you can download the source code, install proper package, and compile yourself 
+
 
 Source code: https://github.com/abf-software/abfVCL
 
 
 ## Demos
-The library contains a lot of demos that show how to use the components. Some of them are available in the `Samples` folder.
+The library contains a lot of demos that show how to use the components. Some of them are available in 
+the [Samples](https://github.com/abf-software/abfVCL/tree/main/Samples) folder.
 
 
 ## History
