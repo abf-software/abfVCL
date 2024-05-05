@@ -1,0 +1,8 @@
+[COMMON]
+
+[D6]
+HPP_OUTPUT_DIR="..\Lib\D6"
+OBJ_OUTPUT_DIR="..\Lib\D6"
+DCU_OUTPUT_DIR="..\Lib\D6"
+"..\Packages\D6\abfComponents_D6_R.dpk"=
+"..\Packages\D6\abfComponents_D6_D.dpk"=

@@ -1,0 +1,62 @@
+package abf_D7_D;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'ABF VCL by ABF software, Inc.'}
+{$DESIGNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  designide,
+  abf_D7_R,
+  dclstd,
+  vcl,
+  rtl,
+  vclactnband,
+  vclx;
+
+contains
+  abfAboutComponent in '..\..\Source\PropertyEditors\abfAboutComponent.pas' {frmAboutComponent},
+  abfAboutApplication in '..\..\Source\PropertyEditors\abfAboutApplication.pas' {frmAboutApplication},
+  abfDesignerWAB in '..\..\Source\PropertyEditors\abfDesignerWAB.pas' {abfWABItemsEditor},
+  abfDesignerStatusBar in '..\..\Source\PropertyEditors\abfDesignerStatusBar.pas' {abfStatusPanelsEditor},
+  abfDesignerFontSizeComboBox in '..\..\Source\PropertyEditors\abfDesignerFontSizeComboBox.pas' {frmDesignerFontSizeComboBox},
+  abfDesignerColorComboBox in '..\..\Source\PropertyEditors\abfDesignerColorComboBox.pas' {frmDesignerColorComboBox},
+  abfDesignerComboBox in '..\..\Source\PropertyEditors\abfDesignerComboBox.pas' {frmDesignerComboBox},
+  abfDesignerFontNameComboBox in '..\..\Source\PropertyEditors\abfDesignerFontNameComboBox.pas' {frmDesignerFontNameComboBox},
+  abfAPMReg in '..\..\Source\Units\abfAPMReg.pas',
+  abfComboBoxesReg in '..\..\Source\Units\abfComboBoxesReg.pas',
+  abfComControlsReg in '..\..\Source\Units\abfComControlsReg.pas',
+  abfComponentsReg in '..\..\Source\Units\abfComponentsReg.pas',
+  abfControlsReg in '..\..\Source\Units\abfControlsReg.pas',
+  abfDialogsReg in '..\..\Source\Units\abfDialogsReg.pas',
+  abfEditsReg in '..\..\Source\Units\abfEditsReg.pas',
+  abfEffectsReg in '..\..\Source\Units\abfEffectsReg.pas',
+  abfGraphicsReg in '..\..\Source\Units\abfGraphicsReg.pas',
+  abfLabelsReg in '..\..\Source\Units\abfLabelsReg.pas',
+  abfMenusReg in '..\..\Source\Units\abfMenusReg.pas',
+  abfReg in '..\..\Source\Units\abfReg.pas',
+  abfStatusBarsReg in '..\..\Source\Units\abfStatusBarsReg.pas',
+  abfWABReg in '..\..\Source\Units\abfWABReg.pas';
+
+end.

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="abf_C5_D.bpl"/>
+    <OBJFILES value="..\..\Lib\C5\abfAboutApplication.obj  ..\..\Lib\C5\abfAboutComponent.obj
+      ..\..\Lib\C5\abfDesignerColorComboBox.obj ..\..\Lib\C5\abfDesignerComboBox.obj
+      ..\..\Lib\C5\abfDesignerFontNameComboBox.obj ..\..\Lib\C5\abfDesignerFontSizeComboBox.obj 
+      ..\..\Lib\C5\abfDesignerStatusBar.obj 
+      ..\..\Lib\C5\abfDesignerWAB.obj ..\..\Lib\C5\abfWABReg.obj 
+      ..\..\Lib\C5\abfAPMReg.obj ..\..\Lib\C5\abfComboBoxesReg.obj 
+      ..\..\Lib\C5\abfComControlsReg.obj ..\..\Lib\C5\abfControlsReg.obj 
+      ..\..\Lib\C5\abfDialogsReg.obj ..\..\Lib\C5\abfEditsReg.obj 
+      ..\..\Lib\C5\abfEffectsReg.obj ..\..\Lib\C5\abfGraphicsReg.obj 
+      ..\..\Lib\C5\abfLabelsReg.obj ..\..\Lib\C5\abfMenusReg.obj 
+      ..\..\Lib\C5\abfReg.obj ..\..\Lib\C5\abfStatusBarsReg.obj 
+      ..\..\Lib\C5\abfComponentsReg.obj ..\..\Lib\C5\abf_C5_D.obj"/>
+    <RESFILES value="abf_C5_D.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) ..\..\Source\PropertyEditors\abfAboutApplication.dfm 
+      ..\..\Source\PropertyEditors\abfAboutComponent.dfm 
+      ..\..\Source\PropertyEditors\abfDesignerColorComboBox.dfm
+      ..\..\Source\PropertyEditors\abfDesignerComboBox.dfm
+      ..\..\Source\PropertyEditors\abfDesignerFontNameComboBox.dfm
+      ..\..\Source\PropertyEditors\abfDesignerFontSizeComboBox.dfm
+      ..\..\Source\PropertyEditors\abfDesignerStatusBar.dfm
+      ..\..\Source\PropertyEditors\abfDesignerWAB.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="Vcl50.lib Vclx50.lib dclstd50.lib abf_C5_R.lib"/>
+    <PACKAGES value="vcl50.bpi Vclx50.bpi dclstd50.bpi abf_C5_R.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;..\..\Lib\C5;..\..\Source;..\..\Source\Units;..\..\Source\ThirdParty;..\..\Source\PropertyEditors;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="tlink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT;USEPACKAGES"/>
+    <MAINSOURCE value="abf_C5_D.cpp"/>
+    <INCLUDEPATH value="..\..\Lib\C5;..\..\Source;..\..\Source\Units;..\..\Source\ThirdParty;..\..\Source\PropertyEditors;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\..\Lib\C5;..\..\Source;..\..\Source\Units;..\..\Source\ThirdParty;..\..\Source\PropertyEditors;$(BCB)\lib\release;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\..\Lib\C5 -I..\..\Source -I..\..\Source\Units -I..\..\Source\ThirdParty
+      -I..\..\Source\PropertyEditors -I$(BCB)\include -I$(BCB)\include\vcl -src_suffix 
+      cpp Editors; -boa"/>
+    <CFLAG1 value="-O2 -H=$(BCB)\lib\vcl50.csm -Hc -Vx -Ve -X- -a8 -b- -k- -vi -c -tWM"/>
+    <PFLAGS value="-NH..\..\Lib\C5 -NO..\..\Lib\C5 -N0..\..\Lib\C5 -$Y- -$L- -$D- -$C- -v -JPHNE -M -LUvcl50 -LUdclstd50"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-D&quot;ABF VCL by ABF software, Inc.&quot; -aa -Tpp -Gpd -x -Gn -Gl -Gi"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+
+  </IDEOPTIONS>
+</PROJECT>

@@ -1,0 +1,44 @@
+package abfComponents_D11_D;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'abfComponents by ABF software, Inc.'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+{$DEFINE RELEASE}
+
+requires
+  rtl,
+  abfComponents_D11_R,
+  vcl,
+  vclx,
+  designide;
+
+contains
+  abfGraphicsReg in '..\..\Source\Units\abfGraphicsReg.pas',
+  abfComponentsReg in '..\..\Source\Units\abfComponentsReg.pas',
+  abfControlsReg in '..\..\Source\Units\abfControlsReg.pas',
+  abfAboutComponent in '..\..\Source\PropertyEditors\abfAboutComponent.pas',
+  abfAboutApplication in '..\..\Source\PropertyEditors\abfAboutApplication.pas';
+
+end.

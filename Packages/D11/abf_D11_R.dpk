@@ -1,0 +1,88 @@
+package abf_D11_R;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'ABF VCL by ABF software, Inc. - Runtime Library'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+{$DEFINE RELEASE}
+
+requires
+  rtl,
+  vclx,
+  vcl;
+
+contains
+  abfAPM in '..\..\Source\Units\abfAPM.pas',
+  abfAPMUtils in '..\..\Source\Units\abfAPMUtils.pas',
+  abfAppProps in '..\..\Source\Units\abfAppProps.pas',
+  abfClasses in '..\..\Source\Units\abfClasses.pas',
+  abfComboBoxes in '..\..\Source\Units\abfComboBoxes.pas',
+  abfComControls in '..\..\Source\Units\abfComControls.pas',
+  abfComControlsConsts in '..\..\Source\Units\abfComControlsConsts.pas',
+  abfComponents in '..\..\Source\Units\abfComponents.pas',
+  abfConsts in '..\..\Source\Units\abfConsts.pas',
+  abfControls in '..\..\Source\Units\abfControls.pas',
+  abfConvUtils in '..\..\Source\Units\abfConvUtils.pas',
+  abfDialogs in '..\..\Source\Units\abfDialogs.pas',
+  abfDialogsConsts in '..\..\Source\Units\abfDialogsConsts.pas',
+  abfEdits in '..\..\Source\Units\abfEdits.pas',
+  abfEditsConsts in '..\..\Source\Units\abfEditsConsts.pas',
+  abfEffects in '..\..\Source\Units\abfEffects.pas',
+  abfEffectsConsts in '..\..\Source\Units\abfEffectsConsts.pas',
+  abfGraphics in '..\..\Source\Units\abfGraphics.pas',
+  abfIdentityManager in '..\..\Source\Units\abfIdentityManager.pas',
+  abfIdentityManagerConsts in '..\..\Source\Units\abfIdentityManagerConsts.pas',
+  abfIDEUtils in '..\..\Source\Units\abfIDEUtils.pas',
+  abfIniFiles in '..\..\Source\Units\abfIniFiles.pas',
+  abfInternet in '..\..\Source\Units\abfInternet.pas',
+  abfKnownFolders in '..\..\Source\Units\abfKnownFolders.pas',
+  abfLabels in '..\..\Source\Units\abfLabels.pas',
+  abfMenus in '..\..\Source\Units\abfMenus.pas',
+  abfPropertyDesc in '..\..\Source\Units\abfPropertyDesc.pas',
+  abfRegistry in '..\..\Source\Units\abfRegistry.pas',
+  abfShlObj in '..\..\Source\Units\abfShlObj.pas',
+  abfShlUtils in '..\..\Source\Units\abfShlUtils.pas',
+  abfStatusBars in '..\..\Source\Units\abfStatusBars.pas',
+  abfStatusBarsConsts in '..\..\Source\Units\abfStatusBarsConsts.pas',
+  abfStdConvs in '..\..\Source\Units\abfStdConvs.pas',
+  abfStdConvsConsts in '..\..\Source\Units\abfStdConvsConsts.pas',
+  abfStrUtils in '..\..\Source\Units\abfStrUtils.pas',
+  abfSysUtils in '..\..\Source\Units\abfSysUtils.pas',
+  abfTypInfo in '..\..\Source\Units\abfTypInfo.pas',
+  abfUSF in '..\..\Source\Units\abfUSF.pas',
+  abfVclConsts in '..\..\Source\Units\abfVclConsts.pas',
+  abfVclUtils in '..\..\Source\Units\abfVclUtils.pas',
+  abfWAB in '..\..\Source\Units\abfWAB.pas',
+  abfWABConsts in '..\..\Source\Units\abfWABConsts.pas',
+  abfWABDialogs in '..\..\Source\Units\abfWABDialogs.pas',
+  abfWABUtils in '..\..\Source\Units\abfWABUtils.pas',
+  KnownFolders in '..\..\Source\ThirdParty\KnownFolders.pas',
+  msident in '..\..\Source\ThirdParty\msident.pas',
+  WabApi in '..\..\Source\ThirdParty\WabApi.pas',
+  WabCode in '..\..\Source\ThirdParty\WabCode.pas',
+  WabDefs in '..\..\Source\ThirdParty\WabDefs.pas',
+  WabIab in '..\..\Source\ThirdParty\WabIab.pas',
+  WabTags in '..\..\Source\ThirdParty\WabTags.pas';
+
+end.

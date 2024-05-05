@@ -1,0 +1,46 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{800a0d9f-5525-4c08-b19f-f8a0257a65e5}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="D11\abf_D11_D.dproj">
+      <Dependencies>D11\abf_D11_R.dproj</Dependencies>
+    </Projects>
+    <Projects Include="D11\abf_D11_R.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="abf_D11_R">
+    <MSBuild Projects="D11\abf_D11_R.dproj" Targets="" />
+  </Target>
+  <Target Name="abf_D11_R:Clean">
+    <MSBuild Projects="D11\abf_D11_R.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="abf_D11_R:Make">
+    <MSBuild Projects="D11\abf_D11_R.dproj" Targets="Make" />
+  </Target>
+  <Target Name="abf_D11_D" DependsOnTargets="abf_D11_R">
+    <MSBuild Projects="D11\abf_D11_D.dproj" Targets="" />
+  </Target>
+  <Target Name="abf_D11_D:Clean" DependsOnTargets="abf_D11_R:Clean">
+    <MSBuild Projects="D11\abf_D11_D.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="abf_D11_D:Make" DependsOnTargets="abf_D11_R:Make">
+    <MSBuild Projects="D11\abf_D11_D.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="abf_D11_R;abf_D11_D" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="abf_D11_R:Clean;abf_D11_D:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="abf_D11_R:Make;abf_D11_D:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

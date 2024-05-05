@@ -1,0 +1,9 @@
+[COMMON]
+DEFINE_SYMBOLS="abfVCLTrial"
+
+[C5]
+HPP_OUTPUT_DIR="..\Lib\C5"
+OBJ_OUTPUT_DIR="..\Lib\C5"
+DCU_OUTPUT_DIR="..\Lib\C5"
+"..\Packages\C5\abf_C5_R.bpk"=
+"..\Packages\C5\abf_C5_D.bpk"=

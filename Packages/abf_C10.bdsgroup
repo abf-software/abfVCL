@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<PersonalityInfo>
+		<Option>
+			<Option Name="Personality">Default.Personality</Option>
+			<Option Name="ProjectType"></Option>
+			<Option Name="Version">1.0</Option>
+			<Option Name="GUID">{CCDEFAB2-117C-49CB-9078-82B9EAE52E97}</Option>
+		</Option>
+	</PersonalityInfo>
+	<Default.Personality>  <Projects>
+      <Projects Name="abf_C10_R.bpl">C10\abf_C10_R.bdsproj</Projects>
+      <Projects Name="abf_C10_D.bpl">C10\abf_C10_D.bdsproj</Projects>
+      <Projects Name="Targets">abf_C10_R.bpl abf_C10_D.bpl</Projects>
+    </Projects>
+    <Dependencies>
+      <Dependency GUID="{C4C39EBD-86FB-483C-9A3F-4E1B6CA5BCD8}">
+        <Dependency GUID="{31A7F91E-2CFC-49FA-B52B-5ADEBBB8E700}"/>
+      </Dependency>
+    </Dependencies>
+  </Default.Personality>
+	<StarTeamAssociation></StarTeamAssociation>
+	<StarTeamNonRelativeFiles></StarTeamNonRelativeFiles>
+</BorlandProject>

@@ -1,0 +1,46 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{204b7e50-2db0-4f9b-bfe1-aafe645fd5b8}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="D11\abfComponents_D11_D.dproj">
+      <Dependencies>D11\abfComponents_D11_R.dproj</Dependencies>
+    </Projects>
+    <Projects Include="D11\abfComponents_D11_R.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="abfComponents_D11_R">
+    <MSBuild Projects="D11\abfComponents_D11_R.dproj" Targets="" />
+  </Target>
+  <Target Name="abfComponents_D11_R:Clean">
+    <MSBuild Projects="D11\abfComponents_D11_R.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="abfComponents_D11_R:Make">
+    <MSBuild Projects="D11\abfComponents_D11_R.dproj" Targets="Make" />
+  </Target>
+  <Target Name="abfComponents_D11_D" DependsOnTargets="abfComponents_D11_R">
+    <MSBuild Projects="D11\abfComponents_D11_D.dproj" Targets="" />
+  </Target>
+  <Target Name="abfComponents_D11_D:Clean" DependsOnTargets="abfComponents_D11_R:Clean">
+    <MSBuild Projects="D11\abfComponents_D11_D.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="abfComponents_D11_D:Make" DependsOnTargets="abfComponents_D11_R:Make">
+    <MSBuild Projects="D11\abfComponents_D11_D.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="abfComponents_D11_R;abfComponents_D11_D" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="abfComponents_D11_R:Clean;abfComponents_D11_D:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="abfComponents_D11_R:Make;abfComponents_D11_D:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

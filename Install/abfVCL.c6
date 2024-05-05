@@ -1,0 +1,10 @@
+[COMMON]
+SEARCH_PATH="..\Source;..\Source\Units;..\Source\ThirdParty;..\Source\PropertyEditors"
+BROWSING_PATH="..\Source;..\Source\Units;..\Source\ThirdParty"
+
+[C6]
+HPP_OUTPUT_DIR="..\Lib\C6"
+OBJ_OUTPUT_DIR="..\Lib\C6"
+DCU_OUTPUT_DIR="..\Lib\C6"
+"..\Packages\C6\abf_C6_R.bpk"=
+"..\Packages\C6\abf_C6_D.bpk"=

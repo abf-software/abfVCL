@@ -1,0 +1,73 @@
+SOFTWARE LICENSE AGREEMENT
+
+You should carefully read the following terms and conditions prior to using this software.
+
+
+License Agreement
+=================
+This is the End User License Agreement (the "AGREEMENT") is a legal agreement between you ("LICENSEE"), the end-user, 
+and ABF software, Inc. ("ABF"), the manufacturer and the copyright owner, for the use of the "ABF Visual Components 
+Library" software product ("SOFTWARE"). 
+
+By using this Software or storing this program on a computer drive (or other media), you are agreeing to be bound by 
+the terms of this Agreement. If you do not agree with the terms of this Agreement, please remove this Software from 
+your system. 
+
+This Software is not Freeware. However, you may install an Evaluation Version of this Software to test and evaluate the 
+application during the Trial Period. If the program meets your requirements, and you wish to continue using the 
+Software, you have to purchase the Registered Version. If you do not want to continue using Software after the Trial 
+Period, please remove this Software from your system.
+
+You accept responsibility for any network usage costs or any other costs, incurred by using this Software.
+
+
+Trial Period
+============
+There is a free 30-day Trial Period for this Software.
+
+
+Evaluation Version
+==================
+The Evaluation Version allows you to test and evaluate characteristics, features, and quality of this Software. You can 
+also test the compatibility of the Software with your hardware and your operating system. The Evaluation Version may 
+have some restricted features or limitations. Using this Software after the Trial Period without registration violates 
+copyright laws and may result in severe civil and criminal penalties. 
+
+
+Registered Version
+==================
+The Registered Version has no restricted features or limitations. You can use registered copy of Software to create any 
+number of own programs, libraries or other software products. If you want to make any software product for somebody 
+else (outsourcing) using this Software, a customer of your development service must purchase the own Registered Version 
+of this Software. 
+
+
+Distribution
+============
+The Evaluation Version of this Software may be distributed freely through on-line services, bulletin boards, or other 
+forms of electronic media, as long as the files are distributed in their entirety. Computer Magazines/Archives are 
+authorized to distribute the Evaluation Version on any Cover Disk or CD-ROM without an individual permission. Please 
+inform us via e-mail (info@abf-dev.com) each time you distribute the evaluation copy.
+
+
+RESTRICTIONS
+============
+YOU MAY NOT ALTER THIS SOFTWARE IN ANY WAY, INCLUDING CHANGING OR REMOVING ANY MESSAGES OR WINDOWS. YOU MAY NOT 
+DECOMPILE, REVERSE ENGINEER, DISASSEMBLE OR OTHERWISE REDUCE THIS SOFTWARE TO A HUMAN PERCEIVABLE FORM. YOU MAY NOT 
+MODIFY, RENT OR RESELL THIS SOFTWARE FOR PROFIT. PUBLICATION OR DISTRIBUTING OF THE REGISTERED VERSION, REGISTRATION 
+PASSWORD OR SOME OF ITS PART IS STRICTLY PROHIBITED!
+
+
+DISCLAIMER
+==========
+THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS WITHOUT WARRANTY OF ANY KIND, EXPRESSED OR IMPLIED, INCLUDING BUT NOT 
+LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND SUITABILITY FOR A PARTICULAR PURPOSE. THE PERSON USING THE 
+SOFTWARE BEARS ALL RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE. ABF WILL NOT BE LIABLE FOR ANY SPECIAL, 
+INCIDENTAL, CONSEQUENTIAL, INDIRECT OR SIMILAR DAMAGES DUE TO LOSS OF DATA OR ANY OTHER REASON, EVEN IF ABF OR AN 
+AGENT OF ABF HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. IN NO EVENT WILL ABF BE LIABLE FOR COSTS OF ANY 
+DAMAGES, EXCEEDING THE PRICE PAID FOR THE SOFTWARE LICENSE, REGARDLESS OF THE FORM OF THE CLAIM. YOU ACKNOWLEDGE THAT 
+YOU HAVE READ THIS LICENSE, UNDERSTOOD IT, AND AGREED TO BE BOUND BY ITS TERMS. 
+
+
+  Copyright (c) 2000-2020 ABF software, Inc. All Rights Reserved.
+

@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="abfComponents_C6_R.bpl"/>
+    <OBJFILES value="..\..\Lib\C6\abfComponents_C6_R.obj ..\..\Lib\C6\abfAppProps.obj 
+      ..\..\Lib\C6\abfClasses.obj ..\..\Lib\C6\abfComponents.obj 
+      ..\..\Lib\C6\abfConsts.obj ..\..\Lib\C6\abfControls.obj 
+      ..\..\Lib\C6\abfGraphics.obj ..\..\Lib\C6\abfIDEUtils.obj 
+      ..\..\Lib\C6\abfPropertyDesc.obj ..\..\Lib\C6\abfRegistry.obj 
+      ..\..\Lib\C6\abfShlObj.obj ..\..\Lib\C6\abfShlUtils.obj ..\..\Lib\C6\abfStrUtils.obj 
+      ..\..\Lib\C6\abfSysUtils.obj ..\..\Lib\C6\abfTypInfo.obj 
+      ..\..\Lib\C6\abfVclConsts.obj ..\..\Lib\C6\abfVclUtils.obj"/>
+    <RESFILES value="abfComponents_C6_R.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="rtl.lib"/>
+    <PACKAGES value="rtl.bpi vcl.bpi vclx.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;..\..\Lib\C6;..\..\Source\Units"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT;USEPACKAGES"/>
+    <MAINSOURCE value="abfComponents_C6_R.cpp"/>
+    <INCLUDEPATH value="..\..\Lib\C6;..\..\Source;..\..\Source\Units;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\..\Lib\C6;..\..\Source;..\..\Source\Units;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\..\Lib\C6 -I..\..\Source -I..\..\Source\Units -I$(BCB)\include -I$(BCB)\include\vcl 
+      -src_suffix cpp -boa"/>
+    <CFLAG1 value="-O2 -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -a8 -b- -k- -vi -c -tWM"/>
+    <PFLAGS value="-NH..\..\Lib\C6 -NO..\..\Lib\C6 -N0..\..\Lib\C6 -$Y- -$L- -$J -$D- -$C- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-I..\..\Lib\C6 -D&quot;abfComponents by ABF software, Inc. - Runtime Library&quot; 
+      -aa -Tpp -Gpr -x -Gn -Gl -Gi"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="abfComponents_C6_R.res" FORMNAME="" UNITNAME="abfComponents_C6_R.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="abfComponents_C6_R.cpp" FORMNAME="" UNITNAME="abfComponents_C6_R" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="rtl.bpi" FORMNAME="" UNITNAME="rtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vcl.bpi" FORMNAME="" UNITNAME="vcl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vclx.bpi" FORMNAME="" UNITNAME="vclx" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfAppProps.pas" FORMNAME="" UNITNAME="abfAppProps" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfClasses.pas" FORMNAME="" UNITNAME="abfClasses" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfComponents.pas" FORMNAME="" UNITNAME="abfComponents" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfConsts.pas" FORMNAME="" UNITNAME="abfConsts" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfControls.pas" FORMNAME="" UNITNAME="abfControls" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfGraphics.pas" FORMNAME="" UNITNAME="abfGraphics" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfIDEUtils.pas" FORMNAME="" UNITNAME="abfIDEUtils" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfPropertyDesc.pas" FORMNAME="" UNITNAME="abfPropertyDesc" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfRegistry.pas" FORMNAME="" UNITNAME="abfRegistry" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfShlObj.pas" FORMNAME="" UNITNAME="abfShlObj" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfShlUtils.pas" FORMNAME="" UNITNAME="abfShlUtils" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfStrUtils.pas" FORMNAME="" UNITNAME="abfStrUtils" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfSysUtils.pas" FORMNAME="" UNITNAME="abfSysUtils" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfTypInfo.pas" FORMNAME="" UNITNAME="abfTypInfo" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfVclConsts.pas" FORMNAME="" UNITNAME="abfVclConsts" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfVclUtils.pas" FORMNAME="" UNITNAME="abfVclUtils" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+  </IDEOPTIONS>
+</PROJECT>

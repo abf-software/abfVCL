@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="abf_C6_D.bpl"/>
+    <OBJFILES value="..\..\Lib\C6\abf_C6_D.obj ..\..\Lib\C6\abfWABReg.obj 
+      ..\..\Lib\C6\abfAPMReg.obj ..\..\Lib\C6\abfComboBoxesReg.obj 
+      ..\..\Lib\C6\abfComControlsReg.obj ..\..\Lib\C6\abfComponentsReg.obj 
+      ..\..\Lib\C6\abfControlsReg.obj ..\..\Lib\C6\abfDialogsReg.obj 
+      ..\..\Lib\C6\abfEditsReg.obj ..\..\Lib\C6\abfEffectsReg.obj 
+      ..\..\Lib\C6\abfGraphicsReg.obj ..\..\Lib\C6\abfLabelsReg.obj 
+      ..\..\Lib\C6\abfMenusReg.obj ..\..\Lib\C6\abfStatusBarsReg.obj 
+      ..\..\Lib\C6\abfReg.obj ..\..\Lib\C6\abfAboutComponent.obj 
+      ..\..\Lib\C6\abfAboutApplication.obj ..\..\Lib\C6\abfDesignerWAB.obj 
+      ..\..\Lib\C6\abfDesignerColorComboBox.obj 
+      ..\..\Lib\C6\abfDesignerComboBox.obj 
+      ..\..\Lib\C6\abfDesignerFontNameComboBox.obj 
+      ..\..\Lib\C6\abfDesignerFontSizeComboBox.obj 
+      ..\..\Lib\C6\abfDesignerStatusBar.obj"/>
+    <RESFILES value="abf_C6_D.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) ..\..\Source\PropertyEditors\abfAboutComponent.dfm 
+      ..\..\Source\PropertyEditors\abfAboutApplication.dfm 
+      ..\..\Source\PropertyEditors\abfDesignerWAB.dfm 
+      ..\..\Source\PropertyEditors\abfDesignerColorComboBox.dfm 
+      ..\..\Source\PropertyEditors\abfDesignerComboBox.dfm 
+      ..\..\Source\PropertyEditors\abfDesignerFontNameComboBox.dfm 
+      ..\..\Source\PropertyEditors\abfDesignerFontSizeComboBox.dfm 
+      ..\..\Source\PropertyEditors\abfDesignerStatusBar.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="rtl.lib"/>
+    <PACKAGES value="rtl.bpi designide.bpi vcl.bpi vclx.bpi dclstd.bpi abf_C6_R.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;..\..\Lib\C6;..\..\Source;..\..\Source\Units;..\..\Source\PropertyEditors;..\..\Source\ThirdParty;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT;USEPACKAGES"/>
+    <MAINSOURCE value="abf_C6_D.cpp"/>
+    <INCLUDEPATH value="..\..\Lib\C6;..\..\Source;..\..\Source\PropertyEditors;..\..\Source\Units;..\..\Source\ThirdParty;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\..\Lib\C6;..\..\Source;..\..\Source\PropertyEditors;..\..\Source\Units;..\..\Source\ThirdParty;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\..\Lib\C6 -I..\..\Source -I..\..\Source\PropertyEditors -I..\..\Source\Units 
+      -I..\..\Source\ThirdParty -I$(BCB)\include -I$(BCB)\include\vcl 
+      -src_suffix cpp -boa"/>
+    <CFLAG1 value="-O2 -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -a8 -b- -k- -vi -c -tWM"/>
+    <PFLAGS value="-NH..\..\Lib\C6 -NO..\..\Lib\C6 -N0..\..\Lib\C6 -$Y- -$L- -$J -$D- -$C- -$A8 -v -JPHNE -M 
+      -LUvcl -LUdclstd"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-I..\..\Lib\C6 -D&quot;ABF VCL by ABF software, Inc.&quot; -aa -Tpp -Gpd -x -Gn -Gl 
+      -Gi"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="abf_C6_D.res" FORMNAME="" UNITNAME="abf_C6_D.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="abf_C6_D.cpp" FORMNAME="" UNITNAME="abf_C6_D" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="rtl.bpi" FORMNAME="" UNITNAME="rtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="designide.bpi" FORMNAME="" UNITNAME="designide" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vcl.bpi" FORMNAME="" UNITNAME="vcl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="vclx.bpi" FORMNAME="" UNITNAME="vclx" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="dclstd.bpi" FORMNAME="" UNITNAME="dclstd" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="abf_C6_R.bpi" FORMNAME="" UNITNAME="abf_C6_R" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfWABReg.pas" FORMNAME="" UNITNAME="abfWABReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfAPMReg.pas" FORMNAME="" UNITNAME="abfAPMReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfComboBoxesReg.pas" FORMNAME="" UNITNAME="abfComboBoxesReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfComControlsReg.pas" FORMNAME="" UNITNAME="abfComControlsReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfComponentsReg.pas" FORMNAME="" UNITNAME="abfComponentsReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfControlsReg.pas" FORMNAME="" UNITNAME="abfControlsReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfDialogsReg.pas" FORMNAME="" UNITNAME="abfDialogsReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfEditsReg.pas" FORMNAME="" UNITNAME="abfEditsReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfEffectsReg.pas" FORMNAME="" UNITNAME="abfEffectsReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfGraphicsReg.pas" FORMNAME="" UNITNAME="abfGraphicsReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfLabelsReg.pas" FORMNAME="" UNITNAME="abfLabelsReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfMenusReg.pas" FORMNAME="" UNITNAME="abfMenusReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfStatusBarsReg.pas" FORMNAME="" UNITNAME="abfStatusBarsReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\Units\abfReg.pas" FORMNAME="" UNITNAME="abfReg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\PropertyEditors\abfAboutComponent.pas" FORMNAME="frmAboutComponent" UNITNAME="abfAboutComponent" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\PropertyEditors\abfAboutApplication.pas" FORMNAME="frmAboutApplication" UNITNAME="abfAboutApplication" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\PropertyEditors\abfDesignerWAB.pas" FORMNAME="abfWABItemsEditor" UNITNAME="abfDesignerWAB" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\PropertyEditors\abfDesignerColorComboBox.pas" FORMNAME="frmDesignerColorComboBox" UNITNAME="abfDesignerColorComboBox" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\PropertyEditors\abfDesignerComboBox.pas" FORMNAME="frmDesignerComboBox" UNITNAME="abfDesignerComboBox" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\PropertyEditors\abfDesignerFontNameComboBox.pas" FORMNAME="frmDesignerFontNameComboBox" UNITNAME="abfDesignerFontNameComboBox" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\PropertyEditors\abfDesignerFontSizeComboBox.pas" FORMNAME="frmDesignerFontSizeComboBox" UNITNAME="abfDesignerFontSizeComboBox" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Source\PropertyEditors\abfDesignerStatusBar.pas" FORMNAME="abfStatusPanelsEditor" UNITNAME="abfDesignerStatusBar" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+
+  </IDEOPTIONS>
+</PROJECT>

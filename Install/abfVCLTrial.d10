@@ -1,0 +1,9 @@
+[COMMON]
+DEFINE_SYMBOLS="abfVCLTrial"
+
+[D10]
+HPP_OUTPUT_DIR="..\Lib\D10"
+OBJ_OUTPUT_DIR="..\Lib\D10"
+DCU_OUTPUT_DIR="..\Lib\D10"
+"..\Packages\D10\abf_D10_R.dpk"=
+"..\Packages\D10\abf_D10_D.dpk"=

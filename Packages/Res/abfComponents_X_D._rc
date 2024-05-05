@@ -1,0 +1,40 @@
+/*------------------------------------------------------------------------*/
+/*                                                                        */
+/*  VERSION.RC                                                            */
+/*                                                                        */
+/*  Copyright (c) 2000-2020 ABF software, Inc.                            */
+/*                                                                        */
+/*------------------------------------------------------------------------*/
+//#include <ver.h>
+
+VS_VERSION_INFO VERSIONINFO
+  FILEVERSION     $VerC$
+  PRODUCTVERSION  $VerC$
+  FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+  FILEOS          VOS__WINDOWS32
+  FILETYPE        VFT_APP
+
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904E4"
+    BEGIN
+      VALUE "CompanyName", "ABF software, Inc.\0"
+      VALUE "FileDescription", "abfComponents by ABF software, Inc.\0"
+      VALUE "FileVersion", "$Ver$\0"
+      VALUE "InternalName", "abfComponents\0"
+      VALUE "LegalCopyright", "Copyright ", 0xA9, " 2000-2009 ABF software, Inc.\0"
+      VALUE "LegalTrademarks", "ABF VCL", 0x2122, "\0"
+      VALUE "ProductName", "abfComponents\0"
+      VALUE "ProductVersion", "$VerS$\0"
+      VALUE "Comments", "abfComponents is a base components set of the ABF VCL\0"
+    END
+
+  END
+
+  BLOCK "VarFileInfo"
+  BEGIN                               //  Language   |    Translation
+    VALUE "Translation", 0x409, 0x4E4 // U.S. English, Windows Multilingual
+  END
+END
+

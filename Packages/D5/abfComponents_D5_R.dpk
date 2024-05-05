@@ -1,0 +1,50 @@
+package abfComponents_D5_R;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS OFF}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS OFF}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO OFF}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'abfComponents by ABF software, Inc. - Runtime Library'}
+{$RUNONLY}
+{$IMPLICITBUILD OFF}
+
+requires
+  vcl50;
+
+contains
+  abfAppProps in '..\..\Source\Units\abfAppProps.pas',
+  abfClasses in '..\..\Source\Units\abfClasses.pas',
+  abfComponents in '..\..\Source\Units\abfComponents.pas',
+  abfConsts in '..\..\Source\Units\abfConsts.pas',
+  abfControls in '..\..\Source\Units\abfControls.pas',
+  abfGraphics in '..\..\Source\Units\abfGraphics.pas',
+  abfIDEUtils in '..\..\Source\Units\abfIDEUtils.pas',
+  abfPropertyDesc in '..\..\Source\Units\abfPropertyDesc.pas',
+  abfRegistry in '..\..\Source\Units\abfRegistry.pas',
+  abfShlObj in '..\..\Source\Units\abfShlObj.pas',
+  abfShlUtils in '..\..\Source\Units\abfShlUtils.pas',
+  abfStrUtils in '..\..\Source\Units\abfStrUtils.pas',
+  abfSysUtils in '..\..\Source\Units\abfSysUtils.pas',
+  abfTypInfo in '..\..\Source\Units\abfTypInfo.pas',
+  abfVclConsts in '..\..\Source\Units\abfVclConsts.pas',
+  abfVclUtils in '..\..\Source\Units\abfVclUtils.pas';
+
+end.
