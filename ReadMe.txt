@@ -5,7 +5,7 @@ Source code: https://github.com/abf-software/abfVCL
 
 Copyright (c) 2000-2020 ABF software, Inc. All Rights Reserved.
 Copyright (c) 2020 Dmytro Golovenko. MIT License.
-Copyright (c) 2022 Sally Peck. MIT License.
+Copyright (c) 2024 Sally Peck. MIT License.
 ================================================================
 
 
