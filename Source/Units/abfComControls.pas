@@ -177,7 +177,11 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+{$IFDEF WIN32}
     function CustomSort(SortProc: TLVCompare; Data: LongInt): Boolean; virtual;
+{$ELSE}
+    function CustomSort(SortProc: TLVCompare; Data: NativeInt): Boolean; virtual;
+{$ENDIF}
     procedure RepaintHeader; virtual;
     procedure DoAutoSizeEx(AVertScroll: Boolean); virtual;
     procedure DoAutoSize; virtual;
@@ -617,7 +621,7 @@ end;
 procedure TabfCustomRichEdit.ReplaceSelectedText(const NewText: string);
 begin
   if not (csDesigning in ComponentState) then if not _ASK then _TADA;
-  SendMessage(Handle, EM_REPLACESEL, Integer(True), Integer(PChar(NewText)));
+  SendMessage(Handle, EM_REPLACESEL, NativeInt(True), NativeInt(PChar(NewText)));
 end;
 
 //------------------------------------------------------------------------------
@@ -729,7 +733,7 @@ end;{function _DefaultListViewCompareItems}
 // Default listview sort function
 
 function _DefaultListViewSort(Item1, Item2: TListItem;
-  lParam: Integer): Integer; stdcall;
+  lParam: NativeInt): Integer; stdcall;
 var
   Str1, Str2: string;
   Column: Integer;
@@ -795,8 +799,13 @@ end;
 //------------------------------------------------------------------------------
 // Method for sorting by custom sort function
 
+{$IFDEF WIN32}
 function TabfCustomListView.CustomSort(SortProc: TLVCompare;
   Data: LongInt): Boolean;
+{$ELSE}
+function TabfCustomListView.CustomSort(SortProc: TLVCompare;
+  Data: NativeInt): Boolean;
+{$ENDIF}
 begin
   Result := False;
   if HandleAllocated then
@@ -843,9 +852,9 @@ procedure TabfCustomListView.DrawSortMark;
 
   //------------------------------------------------------------------------------
 
-  function _GetOrderIndex(Index: Integer): Integer;
+  function _GetOrderIndex(Index: NativeInt): Integer;
   var
-    i: Integer;
+    i: NativeInt;
 {$IfNDef D4}
     SectionOrder: array[0..1024] of Integer;
 {$Else D4}
@@ -1041,7 +1050,13 @@ begin
   if (P <> FNewWndProc) then
   begin
     FPrevWndProc := P;
+{$IFDEF WIN32}
     SetWindowLong(Handle, GWL_WNDPROC, LongInt(FNewWndProc));
+{$ENDIF}
+{$IFDEF WIN64}
+    SetWindowLong(Handle, GWL_WNDPROC, NativeInt(FNewWndProc));
+{$ENDIF}
+
   end;
 end;
 
@@ -1069,7 +1084,12 @@ begin
       else WParamLo := 0;
       if FSortDirection = sdAscending then WParamHi := 1
       else WParamHi := Word(-1);
+
+{$IFDEF WIN32}
       LParam := Integer(@abfListViewSortProc);
+{$ELSE}
+      LParam := NativeInt(@abfListViewSortProc);
+{$ENDIF}
     end;
     Result := CallWindowProc(FPrevWndProc, Handle, Msg, WParam, LParam);
   end;
@@ -1083,7 +1103,11 @@ begin
 
   FHeaderHandle := Wnd;
   FPrevHeaderProc := Pointer(GetWindowLong(FHeaderHandle, GWL_WNDPROC));
+{$IFDEF WIN32}
   SetWindowLong(FHeaderHandle, GWL_WNDPROC, LongInt(FNewHeaderProc));
+{$ELSE}
+  SetWindowLong(FHeaderHandle, GWL_WNDPROC, NativeInt(FNewHeaderProc));
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -1095,7 +1119,11 @@ begin
   if Assigned(FPrevHeaderProc) and (Pointer(GetWindowLong(FHeaderHandle,
     GWL_WNDPROC)) = FNewHeaderProc) then
   begin
+{$IFDEF WIN32}
     SetWindowLong(FHeaderHandle, GWL_WNDPROC, LongInt(FPrevHeaderProc));
+{$ELSE}
+    SetWindowLong(FHeaderHandle, GWL_WNDPROC, NativeInt(FPrevHeaderProc));
+{$ENDIF}
     FPrevHeaderProc := nil;
     FHeaderHandle := 0;
   end;
@@ -1118,7 +1146,11 @@ begin
         FHeadLBDown := True;
         Info.Point.X := TWMLButtonDown(AMsg).Pos.X;
         Info.Point.Y := TWMLButtonDown(AMsg).Pos.Y;
-        FHeadLBCol := SendMessage(FHeaderHandle, HDM_HITTEST, 0, Integer(@Info));
+{$IFDEF WIN32}
+        FHeadLBCol := SendMessage(FHeaderHandle, HDM_HITTEST, 0, Longint(@Info));
+{$ELSE}
+        FHeadLBCol := SendMessage(FHeaderHandle, HDM_HITTEST, 0, NativeInt(@Info));
+{$ENDIF}
         if (Info.Flags and HHT_ONDIVIDER) = 0 then
           FHeadOnDiv := False
         else

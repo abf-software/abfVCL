@@ -813,16 +813,16 @@ var
     @SMsgDlgInformation, @SMsgDlgConfirm, nil);
   ButtonCaptions: array[TMsgDlgBtn] of Pointer = (@SMsgDlgYes, @SMsgDlgNo,
     @SMsgDlgOK, @SMsgDlgCancel, @SMsgDlgAbort, @SMsgDlgRetry, @SMsgDlgIgnore,
-    @SMsgDlgAll, @SMsgDlgNoToAll, @SMsgDlgYesToAll, @SMsgDlgHelp);
+    @SMsgDlgAll, @SMsgDlgNoToAll, @SMsgDlgYesToAll, @SMsgDlgHelp{$IFDEF D9},@SMsgDlgHelpNone{$ENDIF});
 {$EndIf D3}
   IconIDs: array[TMsgDlgType] of PChar = (IDI_EXCLAMATION, IDI_HAND,
     IDI_ASTERISK, IDI_QUESTION, nil);
   ButtonNames: array[TMsgDlgBtn] of string = ('Yes', 'No', 'OK', 'Cancel',
     'Abort', 'Retry', 'Ignore', 'All',{$IfDef D3}'NoToAll', 'YesToAll',{$EndIf}
-    'Help');
+    'Help'{$IFDEF D9}, ''{$ENDIF});
   ModalResults: array[TMsgDlgBtn] of Integer = (mrYes, mrNo, mrOk, mrCancel,
     mrAbort, mrRetry, mrIgnore, mrAll,{$IfDef D3}mrNoToAll, mrYesToAll,{$EndIf}
-    0);
+    0, 0);
 
 var
   ButtonWidths: array[TMsgDlgBtn] of Integer;  // initialized to zero
@@ -1960,7 +1960,7 @@ begin
 
 // Execute
   CmdLine := 'control.exe ' + CmdLine;
-  Result := WinExec(PChar(CmdLine), SW_ShowNormal) > 31;
+  Result := WinExec(PAnsiChar(AnsiString(CmdLine)), SW_ShowNormal) > 31;
 end;
 
 //------------------------------------------------------------------------------
@@ -2066,7 +2066,7 @@ var
   CmdLine: string;
 begin
   CmdLine :='rundll32.exe shell32.dll,OpenAs_RunDLL ' + FileName;
-  Result := WinExec(PChar(CmdLine), 0) > 31;
+  Result := WinExec(PAnsiChar(AnsiString(CmdLine)), 0) > 31;
 end;
 
 
@@ -2325,8 +2325,8 @@ end;
 
 function TabfCreateShortcutDlg.Execute: Boolean;
 begin
-  Result := WinExec(PChar('rundll32 appwiz.cpl,NewLinkHere ' +
-    abfAddSlash(Directory)), SW_SHOWNORMAL) > 31;{}
+  Result := WinExec(PAnsiChar(AnsiString('rundll32 appwiz.cpl,NewLinkHere ' +
+    abfAddSlash(Directory))), SW_SHOWNORMAL) > 31;{}
 end;
 
 

@@ -52,8 +52,8 @@ type
 function SHGetPathFromIDListA(pidl: PItemIDList;
   pszPath: PAnsiChar): BOOL; stdcall;
 {$EXTERNALSYM SHGetPathFromIDListA}
-function SHGetPathFromIDList(pidl: PItemIDList; pszPath: PChar): BOOL; stdcall;
-{$EXTERNALSYM SHGetPathFromIDList}
+//function SHGetPathFromIDList(pidl: PItemIDList; pszPath: PChar): BOOL; stdcall;
+{.$EXTERNALSYM SHGetPathFromIDList}
 function SHGetPathFromIDListW(pidl: PItemIDList;
   pszPath: PWideChar): BOOL; stdcall;
 {$EXTERNALSYM SHGetPathFromIDListW}
@@ -65,9 +65,9 @@ function SHGetSpecialFolderLocation(hwndOwner: HWND; nFolder: Integer;
 function SHGetSpecialFolderPathA(hwndOwner: HWND; lpszPath: PAnsiChar;
   nFolder: Integer; fCreate: BOOL): BOOL; stdcall;
 {$EXTERNALSYM SHGetSpecialFolderPathA}
-function SHGetSpecialFolderPath(hwndOwner: HWND; lpszPath: PChar;
-  nFolder: Integer; fCreate: BOOL): BOOL; stdcall;
-{$EXTERNALSYM SHGetSpecialFolderPath}
+//function SHGetSpecialFolderPath(hwndOwner: HWND; lpszPath: PChar;
+  //nFolder: Integer; fCreate: BOOL): BOOL; stdcall;
+{.$EXTERNALSYM SHGetSpecialFolderPath}
 function SHGetSpecialFolderPathW(hwndOwner: HWND; lpszPath: PWideChar;
   nFolder: Integer; fCreate: BOOL): BOOL; stdcall;
 {$EXTERNALSYM SHGetSpecialFolderPathW}
@@ -137,10 +137,10 @@ end;
 
 //------------------------------------------------------------------------------
 
-function SHGetPathFromIDList(pidl: PItemIDList; pszPath: PChar): BOOL;
+{function SHGetPathFromIDList(pidl: PItemIDList; pszPath: PChar): BOOL;
 begin
   Result := SHGetPathFromIDListA(pidl, pszPath);
-end;
+end;}
 
 //------------------------------------------------------------------------------
 
@@ -214,11 +214,11 @@ end;
 
 //------------------------------------------------------------------------------
 
-function SHGetSpecialFolderPath(hwndOwner: HWND; lpszPath: PChar;
+{function SHGetSpecialFolderPath(hwndOwner: HWND; lpszPath: PChar;
   nFolder: Integer; fCreate: BOOL): BOOL;
 begin
   Result := SHGetSpecialFolderPathA(hwndOwner, lpszPath, nFolder, fCreate);
-end;
+end;}
 
 //------------------------------------------------------------------------------
 

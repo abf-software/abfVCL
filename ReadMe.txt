@@ -5,6 +5,7 @@ Source code: https://github.com/abf-software/abfVCL
 
 Copyright (c) 2000-2020 ABF software, Inc. All Rights Reserved.
 Copyright (c) 2020 Dmytro Golovenko. MIT License.
+Copyright (c) 2022 Sally Peck. MIT License.
 ================================================================
 
 
@@ -23,6 +24,8 @@ for different purposes.
 Requirements
 ============
 * Delphi 5 (or higher) or C++ Builder 5 (or higher).
+* Delphi XE10, XE11, XE12, XE12.1 or C++ Builder XE10, XE11, XE12, XE12.1 (or higher).
+* Tested on x64 and x86.
 * Source code can be compiled with Delphi 3/4, but it is not guaranteed.
 * OS: Windows 98/Me/NT4/2000/XP/2003/Vista/7/8/10/11.
 
@@ -41,6 +44,8 @@ For more information see demo projects or contact our support team.
 
 History
 =======
+May 9th, 2024. (Version 5.x Open Source):
+- Upgraded to Delphi XE10, XE11, XE12, XE12.1 or C++ Builder XE10, XE11, XE12, XE12.1 (or higher).
 
 February 23, 2020. (Version 5.x Open Source):
 On 20th anniversary of ABF software, Inc. the source code of ABF Visual 
@@ -72,4 +77,3 @@ First public release.
 Copyright (c) 2000-2020 ABF software, Inc. All Rights Reserved.
 Copyright (c) 2020 Dmytro Golovenko. MIT License.
 ================================================================
-

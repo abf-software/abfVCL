@@ -202,20 +202,20 @@ function abfAddCharBeforeW(const S: WideString; C: WideChar): WideString;
 // Deletes a part of the S string after the C character occurred after the
 // FromPos position.
 procedure abfDeleteAfterCharExA(var S: AnsiString; C: AnsiChar; FromPos: Integer);
-procedure abfDeleteAfterCharEx(var S: string; C: Char; FromPos: Integer);
+//procedure abfDeleteAfterCharEx(var S: string; C: Char; FromPos: Integer);
 procedure abfDeleteAfterCharExW(var S: WideString; C: WideChar; FromPos: Integer);
 
 //------------------------------------------------------------------------------
 // Deletes a part of the S string before the C character occurred after the
 // FromPos position.
 procedure abfDeleteBeforeCharExA(var S: AnsiString; C: AnsiChar; FromPos: Integer);
-procedure abfDeleteBeforeCharEx(var S: string; C: Char; FromPos: Integer);
+//procedure abfDeleteBeforeCharEx(var S: string; C: Char; FromPos: Integer);
 procedure abfDeleteBeforeCharExW(var S: WideString; C: WideChar; FromPos: Integer);
 
 //------------------------------------------------------------------------------
 // Deletes a part of the S string after the C char.
 procedure abfDeleteAfterCharA(var S: AnsiString; C: AnsiChar);
-procedure abfDeleteAfterChar(var S: string; C: Char);
+//procedure abfDeleteAfterChar(var S: string; C: Char);
 procedure abfDeleteAfterCharW(var S: WideString; C: WideChar);
 
 //------------------------------------------------------------------------------
@@ -666,6 +666,7 @@ end;
 
 //Slightly modified copy of Fastcode function PosEx_JOH_IA32_8
 function abfPosExA(const SubStr, S: AnsiString; From: Integer = 1): Integer;
+(*
 asm {299 Bytes}
   sub     esp, 20
   mov     [esp], ebx
@@ -774,6 +775,9 @@ asm {299 Bytes}
   cmp     eax, [edx+ebx-4]
   je      @@CompareLoop    {Match on Next 4 Characters}
   jmp     @@MainLoop       {No Match}
+*)
+begin
+  Result := pos(SubStr, S, From);
 end;
 
 //------------------------------------------------------------------------------
@@ -787,117 +791,8 @@ end;
 
 //Modified copy of Fastcode function PosEx_JOH_IA32_8
 function abfPosExW(const SubStr, S: WideString; From: Integer = 1): Integer;
-asm
-  sub     esp, 20
-  mov     [esp], ebx
-  cmp     eax, 1
-  sbb     ebx, ebx         {-1 if SubStr = '' else 0}
-  sub     edx, 1           {-1 if S = ''}
-  sbb     ebx, 0           {Negative if S = '' or SubStr = '' else 0}
-  sub     ecx, 1           {From - 1}
-  shl     ecx, 1
-  or      ebx, ecx         {Negative if S = '' or SubStr = '' or From < 1}
-  jl      @@InvalidInput
-  mov     [esp+4], edi
-  mov     [esp+8], esi
-  mov     [esp+12], ebp
-  mov     [esp+16], edx
-  mov     edi, [eax-4]     {Length(SubStr)}
-  mov     esi, [edx-3]     {Length(S)}
-  add     ecx, edi
-  cmp     ecx, esi
-  jg      @@NotFound       {From to High for a Match}
-  test    edi, edi
-  jz      @@NotFound       {Length(SubStr = 0)}
-  lea     ebp, [eax+edi]   {Last Character Position in SubStr + 1}
-  add     esi, edx         {Last Character Position in S}
-  movzx   eax, word ptr [ebp-1]     {Last Character of SubStr}
-  add     edx, ecx         {Search Start Position in S for Last Character}
-  mov     ah, al
-  neg     edi              {-Length(SubStr)}
-  mov     ecx, eax
-  shl     eax, 16
-  or      ecx, eax         {All 4 Bytes = Last Character of SubStr}
-@@MainLoop:
-  add     edx, 4
-  cmp     edx, esi
-  ja      @@Remainder      {1 to 4 Positions Remaining}
-  mov     eax, [edx-4]     {Check Next 4 Bytes of S}
-  xor     eax, ecx         {Zero Byte at each Matching Position}
-  lea     ebx, [eax-$01010101]
-  not     eax
-  and     eax, ebx
-  and     eax, $80808080   {Set Byte to $80 at each Match Position else $00}
-  jz      @@MainLoop       {Loop Until any Match on Last Character Found}
-  bsf     eax, eax         {Find First Match Bit}
-  shr     eax, 3           {Byte Offset of First Match (0..3)}
-  lea     edx, [eax+edx-3] {Address of First Match on Last Character + 1}
-@@Compare:
-  cmp     edi, -4
-  jle     @@Large          {Lenght(SubStr) >= 4}
-  cmp     edi, -1
-  je      @@SetResult      {Exit with Match if Lenght(SubStr) = 1} (**)
-  mov     ax, [ebp+edi]    {Last Char Matches - Compare First 2 Chars}
-  cmp     ax, [edx+edi]
-  jne     @@MainLoop       {No Match on First 2 Characters}
-@@SetResult:               {Full Match}
-  lea     eax, [edx+edi]   {Calculate and Return Result}
-  mov     ebx, [esp]
-  mov     edi, [esp+4]
-  mov     esi, [esp+8]
-  mov     ebp, [esp+12]
-  sub     eax, [esp+16]
-  add     eax, 1
-  shr     eax, 1
-  add     esp, 20
-  ret
-@@NotFound:
-  mov     edi, [esp+4]
-  mov     esi, [esp+8]
-  mov     ebp, [esp+12]
-@@InvalidInput:
-  mov     ebx, [esp]
-  add     esp, 20
-  xor     eax, eax         {Return 0}
-  ret
-@@Remainder:               {Check Last 1 to 4 Characters}
-  mov     eax, [esi-3]     {Last 4 Characters of S - May include Length Bytes}
-  xor     eax, ecx         {Zero Byte at each Matching Position}
-  lea     ebx, [eax-$01010101]
-  not     eax
-  and     eax, ebx
-  and     eax, $80808080   {Set Byte to $80 at each Match Position else $00}
-  jz      @@NotFound       {No Match Possible}
-  lea     eax, [edx-4]     {Check Valid Match Positions}
-  cmp     cl, [eax]
-  lea     edx, [eax+1]
-  je      @@Compare
-  cmp     edx, esi
-  ja      @@NotFound
-  lea     edx, [eax+2]
-  cmp     cl, [eax+1]
-  je      @@Compare
-  cmp     edx, esi
-  ja      @@NotFound
-  lea     edx, [eax+3]
-  cmp     cl, [eax+2]
-  je      @@Compare
-  cmp     edx, esi
-  ja      @@NotFound
-  lea     edx, [eax+4]
-  jmp     @@Compare
-@@Large:
-  mov     eax, [ebp-4]     {Compare Last 4 Characters of S and SubStr}
-  cmp     eax, [edx-4]
-  jne     @@MainLoop       {No Match on Last 4 Characters}
-  mov     ebx, edi
-@@CompareLoop:             {Compare Remaining Characters}
-  add     ebx, 4           {Compare 4 Characters per Loop}
-  jge     @@SetResult      {All Characters Matched}
-  mov     eax, [ebp+ebx-4]
-  cmp     eax, [edx+ebx-4]
-  je      @@CompareLoop    {Match on Next 4 Characters}
-  jmp     @@MainLoop       {No Match}
+begin
+  Result := Pos(SubStr, S, From);
 end;
 
 //------------------------------------------------------------------------------
@@ -1051,7 +946,10 @@ end;
 
 procedure abfReplace(var S: string; Index: Integer; const OldStr, NewStr: string);
 begin
-  abfReplaceA(S, Index, OldStr, NewStr);
+  Delete(S, Index, Length(OldStr));
+  Insert(NewStr, S, Index);
+
+  //abfReplaceA(S, Index, OldStr, NewStr);
 end;
 
 //------------------------------------------------------------------------------
@@ -1097,8 +995,27 @@ end;
 
 procedure abfReplaceSubStringsEx(var S: string; const OldStr, NewStr: string;
   IgnoreCase: Boolean);
+var
+  PosChar, Len: Integer;
+  SUp, OldStrUp: String;
 begin
-  abfReplaceSubStringsExA(S, OldStr, NewStr, IgnoreCase);
+  if not IgnoreCase then
+  begin
+    abfReplaceSubStrings(S, OldStr, NewStr);
+    Exit;
+  end;
+
+  SUp := AnsiUpperCase(S);
+  OldStrUp := AnsiUpperCase(OldStr);
+  PosChar := 1;
+  Len := Length(NewStr);
+  repeat
+    PosChar := abfPosExA(OldStrUp, SUp, PosChar);
+    if PosChar = 0 then Break;
+    abfReplace(S  , PosChar, OldStr, NewStr);
+    abfReplace(SUp, PosChar, OldStr, NewStr);
+    Inc(PosChar, Len);
+  until False;
 end;
 
 //------------------------------------------------------------------------------
@@ -1152,8 +1069,17 @@ end;
 //------------------------------------------------------------------------------
 
 procedure abfReplaceSubStrings(var S: string; const OldStr, NewStr: string);
+var
+  PosChar, Len: Integer;
 begin
-  abfReplaceSubStringsA(S, OldStr, NewStr);
+  PosChar := 1;
+  Len := Length(NewStr);
+  repeat
+    PosChar := abfPosExA(OldStr, S, PosChar);
+    if PosChar = 0 then Break;
+    abfReplace(S, PosChar, OldStr, NewStr);
+    Inc(PosChar, Len);
+  until False;
 end;
 
 //------------------------------------------------------------------------------
@@ -1189,8 +1115,11 @@ end;
 //------------------------------------------------------------------------------
 
 procedure abfReplaceChars(var S: string; OldChar, NewChar: Char);
+var
+  i: Integer;
 begin
-  abfReplaceCharsA(S, OldChar, NewChar);
+  for i := 1 to Length(S) do
+    if S[i] = OldChar then S[i] := NewChar;
 end;
 
 //------------------------------------------------------------------------------
@@ -1288,7 +1217,9 @@ end;
 
 function abfAddChar(const S: string; C: Char): string;
 begin
-  Result := abfAddCharA(S, C);
+  Result := S;
+  if (Length(Result) > 0) and (Result[Length(Result)] <> C) then
+    Result := Result + C;
 end;
 
 //------------------------------------------------------------------------------
@@ -1316,7 +1247,8 @@ end;
 
 function abfAddCharBefore(const S: string; C: Char): string;
 begin
-  Result := abfAddCharBeforeA(S, C);
+  Result := S;
+  if (Length(Result) > 0) and (Result[1] <> C) then Result := C + Result;
 end;
 
 //------------------------------------------------------------------------------
@@ -1344,8 +1276,11 @@ end;
 //------------------------------------------------------------------------------
 
 procedure abfDeleteAfterCharEx(var S: string; C: Char; FromPos: Integer);
+var
+  APos: Integer;
 begin
-  abfDeleteAfterCharExA(S, C, FromPos);
+  APos := abfPosExA(C, S, FromPos);
+  if APos > 0 then Delete(S, APos, MaxInt);
 end;
 
 //------------------------------------------------------------------------------
@@ -1375,8 +1310,11 @@ end;
 //------------------------------------------------------------------------------
 
 procedure abfDeleteBeforeCharEx(var S: string; C: Char; FromPos: Integer);
+var
+  APos: Integer;
 begin
-  abfDeleteBeforeCharExA(S, C, FromPos);
+  APos := abfPosEx(C, S, FromPos);
+  if APos > 0 then Delete(S, 1, APos);
 end;
 
 //------------------------------------------------------------------------------
@@ -1401,10 +1339,10 @@ end;
 
 //------------------------------------------------------------------------------
 
-procedure abfDeleteAfterChar(var S: string; C: Char);
+{procedure abfDeleteAfterChar(var S: string; C: Char);
 begin
-  abfDeleteAfterCharA(S, C);
-end;
+  abfDeleteAfterCharW(S, C);
+end;}
 
 //------------------------------------------------------------------------------
 
@@ -1427,7 +1365,7 @@ end;
 
 procedure abfDeleteBeforeChar(var S: string; C: Char);
 begin
-  abfDeleteBeforeCharA(S, C);
+  abfDeleteBeforeChar(S, C);
 end;
 
 //------------------------------------------------------------------------------
@@ -1694,7 +1632,7 @@ end;
 function abfChangeParams(const S: string; Params: TStrings;
   Separator: Char): string;
 begin
-  Result := abfChangeParamsA(S, Params, Separator);
+  Result := abfChangeParams(S, Params, Separator);
 end;
 
 //------------------------------------------------------------------------------
@@ -1754,7 +1692,7 @@ end;
 function abfEncloseStringEx(const S: string; C: Char;
   AllowDoubleEnclose: Boolean): string;
 begin
-  Result := abfEncloseStringExA(S, C, AllowDoubleEnclose);
+  Result := abfEncloseStringEx(S, C, AllowDoubleEnclose);
 end;
 
 //------------------------------------------------------------------------------
@@ -1799,7 +1737,7 @@ end;
 
 function abfEncloseString(const S: string; C: Char): string;
 begin
-  Result := abfEncloseStringA(S, C);
+  Result := abfEncloseString(S, C);
 end;
 
 //------------------------------------------------------------------------------

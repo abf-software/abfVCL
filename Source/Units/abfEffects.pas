@@ -3861,10 +3861,10 @@ begin
 // Resize FCreditsBitmap and render credits text
   with FCreditsBitmap do
   begin
-    with Credits.TextExtent(Canvas) do
+    //with Credits.TextExtent(Canvas) do
     begin
-      Width  := cx;
-      Height := cy + 10;
+      Width  := Credits.TextExtent(Canvas).cx;
+      Height := Credits.TextExtent(Canvas).cy + 10;
     end;
     Canvas.Brush.Color := Self.Color;
     Canvas.FillRect(Rect(0, 0, Width, Height));

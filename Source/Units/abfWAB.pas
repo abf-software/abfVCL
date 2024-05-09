@@ -1019,7 +1019,7 @@ begin
       if _TWABFileObject(Items[i]).FileName <> '' then
       begin
         if not IsWinNT then
-          Windows.DeleteFileA(PChar(string(_TWABFileObject(Items[i]).FileName)))
+          Windows.DeleteFileA(PAnsiChar(string(_TWABFileObject(Items[i]).FileName)))
         else
           Windows.DeleteFileW(PWideChar(WideString(_TWABFileObject(Items[i]).FileName)));
       end;
@@ -1048,7 +1048,7 @@ begin
           if _TWABFileObject(Items[i]).FileName <> '' then
           begin
             if not IsWinNT then
-              Windows.DeleteFileA(PChar(string(_TWABFileObject(Items[i]).FileName)))
+              Windows.DeleteFileA(PAnsiChar(string(_TWABFileObject(Items[i]).FileName)))
             else
               Windows.DeleteFileW(PWideChar(WideString(_TWABFileObject(Items[i]).FileName)));
           end;
@@ -1263,7 +1263,11 @@ begin
   if FDisplayName <> Value then
   begin
     PropsValues[0].ulPropTag := PR_DISPLAY_NAME;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues,  Length(Value) = 0) then
     begin
       FDisplayName := Value;
@@ -1931,7 +1935,7 @@ begin
   if FNamePrefix <> Value then
   begin
     PropsValues[0].ulPropTag := PR_DISPLAY_NAME_PREFIX;
-    PropsValues[0].Value.lpszA := PChar(Value);
+    PropsValues[0].Value.lpszW := PWideChar(Value);
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FNamePrefix := Value;
@@ -1949,7 +1953,7 @@ begin
   if FGivenName <> Value then
   begin
     PropsValues[0].ulPropTag := PR_GIVEN_NAME;
-    PropsValues[0].Value.lpszA := PChar(Value);
+    PropsValues[0].Value.lpszW := PWideChar(Value);
     if SetPropsValues(1, PropsValues,  Length(Value) = 0) then
     begin
       FGivenName := Value;
@@ -1967,7 +1971,7 @@ begin
   if FMiddleName <> Value then
   begin
     PropsValues[0].ulPropTag := PR_MIDDLE_NAME;
-    PropsValues[0].Value.lpszA := PChar(Value);
+    PropsValues[0].Value.lpszW := PWideChar(Value);
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FMiddleName := Value;
@@ -1985,7 +1989,7 @@ begin
   if FSurname <> Value then
   begin
     PropsValues[0].ulPropTag := PR_SURNAME;
-    PropsValues[0].Value.lpszA := PChar(Value);
+    PropsValues[0].Value.lpszW := PWideChar(Value);
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FSurname := Value;
@@ -2021,7 +2025,11 @@ begin
   if FNickname <> Value then
   begin
     PropsValues[0].ulPropTag := PR_NICKNAME;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FNickname := Value;
@@ -2202,10 +2210,14 @@ begin
           TempAddrTypes[i] := PChar(FAddrTypes[i]);
 
         PropsValues[0].ulPropTag := PR_ADDRTYPE;
-        PropsValues[0].Value.lpszA := PChar(TempDefaultAddrType);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(TempDefaultAddrType);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(TempDefaultAddrType);
+{$ENDIF}
 
         PropsValues[1].ulPropTag := PR_EMAIL_ADDRESS;
-        PropsValues[1].Value.lpszA := PChar(TempDefaultEmail);
+        PropsValues[1].Value.lpszA := PAnsiChar(TempDefaultEmail);
 
         PropsValues[2].ulPropTag := PR_CONTACT_ADDRTYPES;
         PropsValues[2].Value.MVszA.cValues := FAddrTypes.Count;
@@ -2244,7 +2256,7 @@ begin
   if FSpouseName <> Value then
   begin
     PropsValues[0].ulPropTag := PR_SPOUSE_NAME;
-    PropsValues[0].Value.lpszA := PChar(Value);
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FSpouseName := Value;
@@ -2292,7 +2304,11 @@ begin
   if FPersonalHomePage <> Value then
   begin
     PropsValues[0].ulPropTag := PR_PERSONAL_HOME_PAGE;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FPersonalHomePage := Value;
@@ -2310,7 +2326,11 @@ begin
   if FHomeTelephoneNumber <> Value then
   begin
     PropsValues[0].ulPropTag := PR_HOME_TELEPHONE_NUMBER;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FHomeTelephoneNumber := Value;
@@ -2328,7 +2348,11 @@ begin
   if FMobileTelephoneNumber <> Value then
   begin
     PropsValues[0].ulPropTag := PR_MOBILE_TELEPHONE_NUMBER;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FMobileTelephoneNumber := Value;
@@ -2346,7 +2370,11 @@ begin
   if FPagerTelephoneNumber <> Value then
   begin
     PropsValues[0].ulPropTag := PR_PAGER_TELEPHONE_NUMBER;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FPagerTelephoneNumber := Value;
@@ -2364,7 +2392,11 @@ begin
   if FHomeFaxNumber <> Value then
   begin
     PropsValues[0].ulPropTag := PR_HOME_FAX_NUMBER;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FHomeFaxNumber := Value;
@@ -2382,7 +2414,11 @@ begin
   if FHomeAddressCity <> Value then
   begin
     PropsValues[0].ulPropTag := PR_HOME_ADDRESS_CITY;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FHomeAddressCity := Value;
@@ -2400,7 +2436,11 @@ begin
   if FHomeAddressCountry <> Value then
   begin
     PropsValues[0].ulPropTag := PR_HOME_ADDRESS_COUNTRY;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FHomeAddressCountry := Value;
@@ -2418,7 +2458,11 @@ begin
   if FHomeAddressPostalCode <> Value then
   begin
     PropsValues[0].ulPropTag := PR_HOME_ADDRESS_POSTAL_CODE;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FHomeAddressPostalCode := Value;
@@ -2436,7 +2480,11 @@ begin
   if FHomeAddressStateOrProvince <> Value then
   begin
     PropsValues[0].ulPropTag := PR_HOME_ADDRESS_STATE_OR_PROVINCE;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FHomeAddressStateOrProvince := Value;
@@ -2452,7 +2500,11 @@ var
   PropsValues: TSPropsArray;
 begin
   PropsValues[0].ulPropTag := PR_HOME_ADDRESS_STREET;
-  PropsValues[0].Value.lpszA := PChar(Value.Text);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value.Text);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value.Text);
+{$ENDIF}
   if SetPropsValues(1, PropsValues, Trim(Value.Text) = '') then
   begin
     FHomeAddressStreet.Assign(Value);
@@ -2469,7 +2521,7 @@ begin
   if FBusinessHomePage <> Value then
   begin
     PropsValues[0].ulPropTag := PR_BUSINESS_HOME_PAGE;
-    PropsValues[0].Value.lpszA := PChar(Value);
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FBusinessHomePage := Value;
@@ -2487,7 +2539,11 @@ begin
   if FCompanyName <> Value then
   begin
     PropsValues[0].ulPropTag := PR_COMPANY_NAME;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FCompanyName := Value;
@@ -2505,7 +2561,11 @@ begin
   if FTitle <> Value then
   begin
     PropsValues[0].ulPropTag := PR_TITLE;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FTitle := Value;
@@ -2523,7 +2583,11 @@ begin
   if FDepartmentName <> Value then
   begin
     PropsValues[0].ulPropTag := PR_DEPARTMENT_NAME;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FDepartmentName := Value;
@@ -2541,7 +2605,11 @@ begin
   if FOfficeLocation <> Value then
   begin
     PropsValues[0].ulPropTag := PR_OFFICE_LOCATION;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FOfficeLocation := Value;
@@ -2559,7 +2627,11 @@ begin
   if FBusinessTelephoneNumber <> Value then
   begin
     PropsValues[0].ulPropTag := PR_BUSINESS_TELEPHONE_NUMBER;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FBusinessTelephoneNumber := Value;
@@ -2577,7 +2649,11 @@ begin
   if FBusinessFaxNumber <> Value then
   begin
     PropsValues[0].ulPropTag := PR_BUSINESS_FAX_NUMBER;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FBusinessFaxNumber := Value;
@@ -2595,7 +2671,11 @@ begin
   if FBusinessAddressCity <> Value then
   begin
     PropsValues[0].ulPropTag := PR_BUSINESS_ADDRESS_CITY;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FBusinessAddressCity := Value;
@@ -2613,7 +2693,11 @@ begin
   if FBusinessAddressCountry <> Value then
   begin
     PropsValues[0].ulPropTag := PR_BUSINESS_ADDRESS_COUNTRY;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FBusinessAddressCountry := Value;
@@ -2631,7 +2715,11 @@ begin
   if FBusinessAddressPostalCode <> Value then
   begin
     PropsValues[0].ulPropTag := PR_BUSINESS_ADDRESS_POSTAL_CODE;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FBusinessAddressPostalCode := Value;
@@ -2649,7 +2737,11 @@ begin
   if FBusinessAddressStateOrProvince <> Value then
   begin
     PropsValues[0].ulPropTag := PR_BUSINESS_ADDRESS_STATE_OR_PROVINCE;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FBusinessAddressStateOrProvince := Value;
@@ -2665,7 +2757,11 @@ var
   PropsValues: TSPropsArray;
 begin
   PropsValues[0].ulPropTag := PR_BUSINESS_ADDRESS_STREET;
-  PropsValues[0].Value.lpszA := PChar(Value.Text);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
   if SetPropsValues(1, PropsValues, Trim(Value.Text) = '') then
   begin
     FBusinessAddressStreet.Assign(Value);
@@ -2680,7 +2776,11 @@ var
   PropsValues: TSPropsArray;
 begin
   PropsValues[0].ulPropTag := PR_COMMENT;
-  PropsValues[0].Value.lpszA := PChar(Value.Text);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value.Text);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value.Text);
+{$ENDIF}
   if SetPropsValues(1, PropsValues, Trim(Value.Text) = '') then
   begin
     FComment.Assign(Value);
@@ -2717,7 +2817,11 @@ begin
     PropsValues[0].ulPropTag := PR_IP_PHONE;
     if WAB.FWABSharedMode then
       PropsValues[0].ulPropTag := PropsValues[0].ulPropTag or $30000000;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FIPPhone := Value;
@@ -3046,7 +3150,11 @@ var
   PropsValues: TSPropsArray;
 begin
   PropsValues[0].ulPropTag := PR_DISPLAY_NAME;
-  PropsValues[0].Value.lpszA := PChar(FDisplayName);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(FDisplayName);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(FDisplayName);
+{$ENDIF}
   if CheckIDistList then
     FDistList.SetProps(1, @PropsValues, nil);
 end;
@@ -3470,7 +3578,11 @@ begin
   if FHomePage <> Value then
   begin
     PropsValues[0].ulPropTag := PR_PERSONAL_HOME_PAGE;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FHomePage := Value;
@@ -3488,7 +3600,11 @@ begin
   if FTelephoneNumber <> Value then
   begin
     PropsValues[0].ulPropTag := PR_HOME_TELEPHONE_NUMBER;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FTelephoneNumber := Value;
@@ -3506,7 +3622,11 @@ begin
   if FFaxNumber <> Value then
   begin
     PropsValues[0].ulPropTag := PR_HOME_FAX_NUMBER;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FFaxNumber := Value;
@@ -3524,7 +3644,11 @@ begin
   if FCity <> Value then
   begin
     PropsValues[0].ulPropTag := PR_HOME_ADDRESS_CITY;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FCity := Value;
@@ -3542,7 +3666,11 @@ begin
   if FCountry <> Value then
   begin
     PropsValues[0].ulPropTag := PR_HOME_ADDRESS_COUNTRY;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FCountry := Value;
@@ -3560,7 +3688,11 @@ begin
   if FPostalCode <> Value then
   begin
     PropsValues[0].ulPropTag := PR_HOME_ADDRESS_POSTAL_CODE;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FPostalCode := Value;
@@ -3578,7 +3710,11 @@ begin
   if FStateOrProvince <> Value then
   begin
     PropsValues[0].ulPropTag := PR_HOME_ADDRESS_STATE_OR_PROVINCE;
-    PropsValues[0].Value.lpszA := PChar(Value);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value);
+{$ENDIF}
     if SetPropsValues(1, PropsValues, Length(Value) = 0) then
     begin
       FStateOrProvince := Value;
@@ -3594,7 +3730,11 @@ var
   PropsValues: TSPropsArray;
 begin
   PropsValues[0].ulPropTag := PR_HOME_ADDRESS_STREET;
-  PropsValues[0].Value.lpszA := PChar(Value.Text);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value.Text);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value.Text);
+{$ENDIF}
   if SetPropsValues(1, PropsValues, Trim(Value.Text) = '') then
   begin
     FStreet.Assign(Value);
@@ -3609,7 +3749,11 @@ var
   PropsValues: TSPropsArray;
 begin
   PropsValues[0].ulPropTag := PR_COMMENT;
-  PropsValues[0].Value.lpszA := PChar(Value.Text);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(Value.Text);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(Value.Text);
+{$ENDIF}
   if SetPropsValues(1, PropsValues, Trim(Value.Text) = '') then
   begin
     FComment.Assign(Value);
@@ -3822,7 +3966,11 @@ var
   PropsValues: TSPropsArray;
 begin
   PropsValues[0].ulPropTag := PR_DISPLAY_NAME;
-  PropsValues[0].Value.lpszA := PChar(FDisplayName);
+{$IFDEF UNICODE}
+    PropsValues[0].Value.lpszW := PWideChar(FDisplayName);
+{$ELSE}
+    PropsValues[0].Value.lpszA := PAnsiChar(FDisplayName);
+{$ENDIF}
   if CheckIABContainer then
     FABContainer.SetProps(1, @PropsValues, nil);
 end;
@@ -5343,7 +5491,7 @@ begin
     WP.hwnd := Application.Handle;
 
     if (FWABMode = wmWABFile) then
-      WP.szFileName := PChar(FFileName)
+      WP.szFileName := PAnsiChar(AnsiString(FFileName))
     else if FEnableProfiles and (not FWABSharedMode) then
       WP.ulFlags := WAB_ENABLE_PROFILES;
 

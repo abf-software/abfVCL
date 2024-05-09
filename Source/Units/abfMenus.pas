@@ -442,14 +442,19 @@ procedure TabfSystemMenuItem.Remove;
 var
   Menu: HMENU;
   Buff: array[1..255] of Char;
-  S: string;
+  S: widestring;
 begin
   inherited Remove;
   if not Assigned(MenuItem) then Exit;
   Menu := MenuHandle;
   GetMenuString(Menu, Command, @Buff, SizeOf(Buff), MF_BYCOMMAND);
+{$IFDEF WIN32}
   S := StrPas(@Buff);
-  abfDeleteAfterChar(S, #9);
+  abfDeleteAfterCharW(S, #9);
+{$ELSE}
+  S := Buff;
+  abfDeleteAfterCharW(S, #9);
+{$ENDIF}
   if (AnsiCompareText(MenuItem.Caption, S) = 0) or (MenuItem.Caption = '-') then
     RemoveMenu(Menu, Command, MF_BYCOMMAND);
 end;
@@ -556,7 +561,7 @@ procedure TabfSystemMenuInserter.Remove;
 var
   Menu: HMENU;
   Buff: array[1..255] of Char;
-  S: string;
+  S: widestring;
   i: Integer;
 begin
   inherited Remove;
@@ -566,8 +571,13 @@ begin
     for i := 0 to Items.Count - 1 do
     begin
       GetMenuString(Menu, Items[i].Command, @Buff, SizeOf(Buff), MF_BYCOMMAND);
+{$IFDEF D9}
+      S := Buff;
+      abfDeleteAfterCharW(S, #9);
+{$ELSE}
       S := StrPas(@Buff);
       abfDeleteAfterChar(S, #9);
+{$ENDIF}
       if (AnsiCompareText(Items[i].Caption, S) = 0) or
         (Items[i].Caption = '-') then
         RemoveMenu(Menu, Items[i].Command, MF_BYCOMMAND);

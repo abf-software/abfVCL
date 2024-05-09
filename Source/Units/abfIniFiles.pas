@@ -206,17 +206,22 @@ procedure TabfIniFile.SetStrings(List: TStrings);
 
   //-------------------------------------
 
-  function _TrimAroundEqual(const S: string): string;
+  function _TrimAroundEqual(const S: string): widestring;
   var
     P: Integer;
-    Name: string;
+    Name: widestring;
   begin
     Result := {Trim}(S);
     P := AnsiPos('=', Result);
     if P <= 0 then Exit;
     Name := Result;
-    abfDeleteAfterChar(Name, '=');
-    abfDeleteBeforeChar(Result, '=');
+{$IFDEF D9}
+    abfDeleteAfterCharW(Name, '=');
+    abfDeleteBeforeCharW(Result, '=');
+{$ELSE}
+    abfDeleteAfterCharA(Name, '=');
+    abfDeleteBeforeCharA(Result, '=');
+{$ENDIF}
     Result := TrimRight(Name) + '=' + TrimLeft(Result);
   end;{Internal _TrimAroundEqual}
 

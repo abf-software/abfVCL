@@ -51,7 +51,7 @@ type
     PUSHEAX: Byte;
     PUSHEDX: Byte;
     JMP: Byte;
-    JmpOffset: Integer;
+    JmpOffset: NativeInt;//Integer;
   end;
 
 {$IfNDef D6}
@@ -1159,7 +1159,7 @@ begin
     Win32Check(VerQueryValueW(Pointer(FBuffer), PWideChar(cVerFixedInfo),
       Pointer(FFixedBuffer), Size))
   else
-    Win32Check(VerQueryValue(Pointer(FBuffer), PAnsiChar(AnsiString(cVerFixedInfo)),
+    Win32Check(VerQueryValueA(Pointer(FBuffer), PAnsiChar(AnsiString(cVerFixedInfo)),
       Pointer(FFixedBuffer), Size));
   if Size < SizeOf(TVSFixedFileInfo) then RaiseLastWin32Error;
   ExtractLanguageIds;
@@ -1191,7 +1191,7 @@ begin
     Win32Check(VerQueryValueW(PAnsiChar(FBuffer), PWideChar(cVerFixedInfo),
       Pointer(FFixedBuffer), Size))
   else
-    Win32Check(VerQueryValue(PAnsiChar(FBuffer), PAnsiChar(AnsiString(cVerFixedInfo)),
+    Win32Check(VerQueryValueA(PAnsiChar(FBuffer), PAnsiChar(AnsiString(cVerFixedInfo)),
       Pointer(FFixedBuffer), Size));
   if Size < SizeOf(TVSFixedFileInfo) then RaiseLastWin32Error;
   ExtractLanguageIds;
@@ -1220,7 +1220,7 @@ begin
   if IsWinNT then
     Result := GetFileVersionInfoSizeW(PWideChar(AFileName), Handle) > 0
   else
-    Result := GetFileVersionInfoSize(PAnsiChar(AnsiString(AFileName)), Handle) > 0;
+    Result := GetFileVersionInfoSizeA(PAnsiChar(AnsiString(AFileName)), Handle) > 0;
 end;
 
 //------------------------------------------------------------------------------
@@ -1288,14 +1288,14 @@ begin
   if IsWinNT then
     Size := GetFileVersionInfoSizeW(PWideChar(FFileName), Handle)
   else
-    Size := GetFileVersionInfoSize(PAnsiChar(AnsiString(FFileName)), Handle);
+    Size := GetFileVersionInfoSizeA(PAnsiChar(AnsiString(FFileName)), Handle);
   if Size = 0 then raise EabfFileVersionInfo.Create(SabfFileVersionInfo_NoInfo);
   SetLength(FBuffer, Size);
   if IsWinNT then
     Win32Check(GetFileVersionInfoW(PWideChar(FFileName), Handle, Size,
       PAnsiChar(FBuffer)))
   else
-    Win32Check(GetFileVersionInfo(PAnsiChar(AnsiString(FFileName)), Handle, Size,
+    Win32Check(GetFileVersionInfoA(PAnsiChar(AnsiString(FFileName)), Handle, Size,
       PAnsiChar(FBuffer)));
 end;
 
@@ -1313,7 +1313,7 @@ begin
     Res := VerQueryValueW(PAnsiChar(FBuffer), PWideChar(cVerTranslation),
       Pointer(Translation), Size)
   else
-    Res := VerQueryValue(PAnsiChar(FBuffer), PAnsiChar(AnsiString(cVerTranslation)),
+    Res := VerQueryValueA(PAnsiChar(FBuffer), PAnsiChar(AnsiString(cVerTranslation)),
       Pointer(Translation), Size);
 
   if Res then
@@ -1381,7 +1381,7 @@ begin
       Result := WideString(PWideChar(Buf));
     end else
     begin
-      VerLanguageName(LoWord(D), PAnsiChar(Buf), BufSize);
+      VerLanguageNameA(LoWord(D), PAnsiChar(Buf), BufSize);
       Result := AnsiString(PAnsiChar(Buf));
     end;
   finally
@@ -1407,7 +1407,7 @@ begin
       Result := WideString(PWideChar(P));
   end else
   begin
-    if VerQueryValue(PAnsiChar(FBuffer), PAnsiChar(AnsiString(WS)), P, Size) then
+    if VerQueryValueA(PAnsiChar(FBuffer), PAnsiChar(AnsiString(WS)), P, Size) then
       Result := AnsiString(PAnsiChar(P));
   end;
 end;
@@ -1430,7 +1430,7 @@ begin
       Result := WideString(PWideChar(P));
   end else
   begin
-    if VerQueryValue(PAnsiChar(FBuffer), PAnsiChar(AnsiString(WS)), P, Size) then
+    if VerQueryValueA(PAnsiChar(FBuffer), PAnsiChar(AnsiString(WS)), P, Size) then
       Result := AnsiString(PAnsiChar(P));
   end;
 end;
@@ -1710,7 +1710,7 @@ var
   TempKey: HKEY;
   rcd, rcd2: REG_CHANGE_DATA;
 begin
-  Res := RegOpenKeyEx(FRootKey, PAnsiChar(FRegistryKey), 0, KEY_READ, FKey);
+  Res := RegOpenKeyExA(FRootKey, PAnsiChar(FRegistryKey), 0, KEY_READ, FKey);
 
   FKeyExists := (Res = ERROR_SUCCESS);
 
@@ -1739,7 +1739,7 @@ begin
       WAIT_OBJECT_0: ReleaseMutex(Mutex);
       WAIT_OBJECT_0 + 1:
         begin
-          Res := RegOpenKeyEx(FRootKey, PAnsiChar(FRegistryKey), 0, KEY_READ,
+          Res := RegOpenKeyExA(FRootKey, PAnsiChar(FRegistryKey), 0, KEY_READ,
             TempKey);
           if (Res <> ERROR_SUCCESS) then
           begin
@@ -1785,7 +1785,7 @@ begin
     try
       if FWaitChanged then
       begin
-        Res := RegOpenKeyEx(FRootKey, PAnsiChar(FRegistryKey), 0, KEY_READ, FKey);
+        Res := RegOpenKeyExA(FRootKey, PAnsiChar(FRegistryKey), 0, KEY_READ, FKey);
         FKeyExists := Res = ERROR_SUCCESS;
         if FKeyExists then
           FWaitHandle := abfRegFindFirstChangeNotification(FKey, FWatchSubTree,

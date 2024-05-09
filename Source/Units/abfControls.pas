@@ -3723,7 +3723,7 @@ begin
     BeginUpdate;
     try
       for i := Count + 1 to 12 do
-        Add(LongMonthNames[i]);
+        Add({$IFDEF DFMT}FormatSettings.{$ENDIF}LongMonthNames[i]);
     finally
       EndUpdate;
     end;
@@ -4142,7 +4142,7 @@ begin
   if ControlsLayout = dplSystemDefault then
   begin
     FInternalControlsLayout := dplDMY;
-    S := abfLeaveCharset(['d', 'm', 'y'], AnsiLowerCase(ShortDateFormat));
+    S := abfLeaveCharset(['d', 'm', 'y'], AnsiLowerCase({$IFDEF DFMT}FormatSettings.{$ENDIF}ShortDateFormat));
     abfReplaceSubStrings(S, 'dd', 'd');
     abfReplaceSubStrings(S, 'mm', 'm');
     abfReplaceSubStrings(S, 'yy', 'y');

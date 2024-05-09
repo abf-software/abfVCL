@@ -1729,7 +1729,7 @@ begin
   if ResModule = 0 then Exit;
 
   try
-    ResInfo := FindResourceA(ResModule, 'DESCRIPTION', RT_RCDATA);
+    ResInfo := FindResourceA(ResModule, 'DESCRIPTION', PAnsiChar(RT_RCDATA));
     if ResInfo <> 0 then
     begin
       ResData := LoadResource(ResModule, ResInfo);
@@ -1780,7 +1780,7 @@ begin
   if ResModule = 0 then Exit;
 
   try
-    ResInfo := FindResourceA(ResModule, 'DESCRIPTION', RT_RCDATA);
+    ResInfo := FindResourceA(ResModule, 'DESCRIPTION', PAnsiChar(RT_RCDATA));
     if ResInfo <> 0 then
     begin
       ResData := LoadResource(ResModule, ResInfo);
