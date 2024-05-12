@@ -693,6 +693,7 @@ type
   PabfNotifyIconDataWVer4 = ^TabfNotifyIconDataWVer4;
   {$EXTERNALSYM PabfNotifyIconDataWVer4}
 
+  (*
   TabfNotifyIconDataAVer5  = packed record
     cbSize: DWORD;
     hWnd: HWND;
@@ -735,7 +736,7 @@ type
   PabfNotifyIconDataWVer5 = ^TabfNotifyIconDataWVer5;
   {$EXTERNALSYM PabfNotifyIconDataWVer5}
 
-  TabfNotifyIconDataAVer6  = packed record
+  (*TabfNotifyIconDataAVer6  = packed record
     cbSize: DWORD;
     hWnd: HWND;
     uID: UINT;
@@ -778,7 +779,7 @@ type
   {$EXTERNALSYM TabfNotifyIconDataWVer6}
   PabfNotifyIconDataWVer6 = ^TabfNotifyIconDataWVer6;
   {$EXTERNALSYM PabfNotifyIconDataWVer6}
-
+  *)
   EabfTrayIcon = class(EabfException);
 
   TabfTrayIconInfoType = (tiiNone, tiiInfo, tiiWarning, tiiError, tiiUser);
@@ -852,7 +853,7 @@ type
     procedure SetInfoTimeOut(AValue: Integer);
     procedure SetInfoType(AValue: TabfTrayIconInfoType);
   protected
-    function CallShellNotifyIcon(AMessage: DWORD): Boolean; virtual;
+    function CallShellNotifyIcon(AMessage: {$IFDEF D9}NativeInt{$ELSE}DWORD{$ENDIF}): Boolean; virtual;
     procedure Notification(AComponent: TComponent;
       Operation: TOperation); override;
     procedure Loaded; override;
@@ -1895,8 +1896,13 @@ begin
       TabfCustomWndProcHook(List[i]).FOldWndProc :=
         TabfCustomWndProcHook(List[i - 1]).FNewWndProc;
   // Set proc of the last item to the window
+{$IFDEF WIN32}
     SetWindowLong(AHandle, GWL_WNDPROC,
       LongInt(TabfCustomWndProcHook(List[List.Count - 1]).FNewWndProc));
+{$ELSE}
+    SetWindowLong(AHandle, GWL_WNDPROC,
+      NativeInt(TabfCustomWndProcHook(List[List.Count - 1]).FNewWndProc));
+{$ENDIF}
   finally
     List.Free;
   end;
@@ -1921,7 +1927,11 @@ begin
   // If there are no items in List, just set the default proc to the window
     if List.Count < 1 then
     begin
+      {$IFDEF WIN32}
       SetWindowLong(AHandle, GWL_WNDPROC, LongInt(DefaultProc));
+      {$ELSE}
+      SetWindowLong(AHandle, GWL_WNDPROC, NativeInt(DefaultProc));
+      {$ENDIF}
       Exit;
     end;
   // Normalize the List
@@ -1930,8 +1940,13 @@ begin
       TabfCustomWndProcHook(List[i]).FOldWndProc :=
         TabfCustomWndProcHook(List[i - 1]).FNewWndProc;
   // Set proc of the last item to the window
+{$IFDEF WIN32}
     SetWindowLong(AHandle, GWL_WNDPROC,
       LongInt(TabfCustomWndProcHook(List[List.Count - 1]).FNewWndProc));
+{$ELSE}
+    SetWindowLong(AHandle, GWL_WNDPROC,
+      NativeInt(TabfCustomWndProcHook(List[List.Count - 1]).FNewWndProc));
+{$ENDIF}
   finally
     List.Free;
   end;
@@ -3552,19 +3567,19 @@ begin
 
 // Fill extended info members
   if IsWinNT then
-    with PabfNotifyIconDataWVer5(FNotifyIconData)^ do
+    with PNotifyIconDataW(FNotifyIconData)^ do
     begin
       dwInfoFlags := DWORD(AType);
       if FInfoNoSound then
         dwInfoFlags := dwInfoFlags or NIIF_NOSOUND;
       uFlags      := NIF_INFO;
       uTimeout    := InfoTimeOut;
-      Move(PWideChar(AText)^, szInfo, Min((SizeOf(szInfo) - 1),
+      Move(PWideChar(AText)^, szInfo, Min((length(szInfo) - 1),
         Length(AText) * 2));
-      Move(PWideChar(ATitle)^, szInfoTitle, Min((SizeOf(szInfoTitle) - 1),
+      Move(PWideChar(ATitle)^, szInfoTitle, Min((length(szInfoTitle) - 1),
         Length(ATitle) * 2));
-    end
-  else
+    end;
+  (*else
     with PabfNotifyIconDataAVer5(FNotifyIconData)^ do
     begin
       dwInfoFlags := DWORD(AType);
@@ -3577,7 +3592,7 @@ begin
       Move(PChar(string(ATitle))^, szInfoTitle, Min((SizeOf(szInfoTitle) - 1),
         Length(ATitle)));
     end;
-
+  *)
 // Show a balloon
   Result := CallShellNotifyIcon(NIM_MODIFY);
 end;
@@ -3598,7 +3613,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-function TabfTrayIcon.CallShellNotifyIcon(AMessage: DWORD): Boolean;
+function TabfTrayIcon.CallShellNotifyIcon(AMessage: {$IFDEF D9}NativeInt{$ELSE}DWORD{$ENDIF}): Boolean;
 begin
   Result := False;
   if not Assigned(FNotifyIconData) then Exit;
@@ -3752,16 +3767,16 @@ var
     if (TempShellVer >= $00050000) and (TempShellVer < $00060000) then
     begin
       if IsWinNT then
-        TempSize := SizeOf(TabfNotifyIconDataWVer5)
+        TempSize := SizeOf(_NOTIFYICONDATAA)
       else
-        TempSize := SizeOf(TabfNotifyIconDataAVer5);
+        TempSize := SizeOf(_NOTIFYICONDATAA);
     end else
     if (TempShellVer >= $00060000) then
     begin
       if IsWinNT then
-        TempSize := SizeOf(TabfNotifyIconDataWVer6)
+        TempSize := SizeOf(_NOTIFYICONDATAA)
       else
-        TempSize := SizeOf(TabfNotifyIconDataAVer6);
+        TempSize := SizeOf(_NOTIFYICONDATAA);
     end;
 
     if TempSize < 4 then Exit;
@@ -3812,18 +3827,18 @@ var
 
     if IsWinNT then
     begin
-      with PabfNotifyIconDataWVer5(FNotifyIconData)^ do
+      with PNotifyIconDataW(FNotifyIconData)^ do
       begin
         if ShowHint then
-          Move(PWideChar(FHint)^, szTip, Min((SizeOf(szTip) - 1),
+          Move(PWideChar(FHint)^, szTip, Min((Length(szTip) - 1),
           Length(FHint) * 2));
       end
     end else
     begin
-      with PabfNotifyIconDataAVer5(FNotifyIconData)^ do
+      with PNotifyIconDataA(FNotifyIconData)^ do
       begin
         if ShowHint then
-          Move(PChar(string(FHint))^, szTip, Min((SizeOf(szTip) - 1),
+          Move(PChar(string(FHint))^, szTip, Min((Length(szTip) - 1),
           Length(FHint)));
       end
     end;
@@ -3861,7 +3876,11 @@ begin
   if (csDesigning in ComponentState) then Exit;
   FOldAppProc := Pointer(GetWindowLong(Application.Handle, GWL_WNDPROC));
   FNewAppProc := MakeObjectInstance(HookAppProc);
+{$IFDEF WIN32}
   SetWindowLong(Application.Handle, GWL_WNDPROC, LongInt(FNewAppProc));
+{$ELSE}
+  SetWindowLong(Application.Handle, GWL_WNDPROC, NativeInt(FNewAppProc));
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -3869,7 +3888,11 @@ end;
 procedure TabfTrayIcon.UnhookApp;
 begin
   if Assigned(FOldAppProc) then
+{$IFDEF WIN32}
     SetWindowLong(Application.Handle, GWL_WNDPROC, LongInt(FOldAppProc));
+{$ELSE}
+    SetWindowLong(Application.Handle, GWL_WNDPROC, NativeInt(FOldAppProc));
+{$ENDIF}
   if Assigned(FNewAppProc) then FreeObjectInstance(FNewAppProc);
   FNewAppProc := nil;
   FOldAppProc := nil;
@@ -4243,14 +4266,14 @@ begin
   if IsWinNT then
     Mutex := CreateMutexW(nil, True, PWideChar(WS + 'CriticalSection'))  // don't localize
   else
-    Mutex := CreateMutex(nil, True, PAnsiChar(AnsiString(WS) + 'CriticalSection')); // don't localize
+    Mutex := CreateMutexA(nil, True, PAnsiChar(AnsiString(WS) + 'CriticalSection')); // don't localize
 
   if (GetLastError <> 0) or (Mutex = 0) then Exit;
 
   if IsWinNT then
     _OneInstanceMutex := CreateMutexW(nil, False, PWideChar(WS + 'Default'))  // don't localize
   else
-    _OneInstanceMutex := CreateMutex(nil, False, PAnsiChar(AnsiString(WS) + 'Default')); // don't localize
+    _OneInstanceMutex := CreateMutexA(nil, False, PAnsiChar(AnsiString(WS) + 'Default')); // don't localize
 
   Flag := WaitForSingleObject(_OneInstanceMutex, 0);
   Result := (Flag = WAIT_TIMEOUT);

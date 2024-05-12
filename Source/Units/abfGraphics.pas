@@ -171,8 +171,8 @@ function abfGetAverageCharSize(Canvas: TCanvas): TPoint;
 
 function abfGetIconFromInstanceA(AInstance: HINST; AResName: PAnsiChar;
   ARequestedIconSize: TPoint; ARequestedIconBPP: Integer): HICON;
-function abfGetIconFromInstance(AInstance: HINST; AResName: PChar;
-  ARequestedIconSize: TPoint; ARequestedIconBPP: Integer): HICON;
+//function abfGetIconFromInstance(AInstance: HINST; AResName: PAnsiChar;
+//  ARequestedIconSize: TPoint; ARequestedIconBPP: Integer): HICON;
 function abfGetIconFromInstanceW(AInstance: HINST; AResName: PWideChar;
   ARequestedIconSize: TPoint; ARequestedIconBPP: Integer): HICON;
 
@@ -183,8 +183,8 @@ function abfGetIconFromInstanceW(AInstance: HINST; AResName: PWideChar;
 function abfGetIconFromLibraryA(const ALibFileName: AnsiString;
   AResName: PAnsiChar; ARequestedIconSize: TPoint;
   ARequestedIconBPP: Integer): HICON;
-function abfGetIconFromLibrary(const ALibFileName: string; AResName: PChar;
-  ARequestedIconSize: TPoint; ARequestedIconBPP: Integer): HICON;
+//function abfGetIconFromLibrary(const ALibFileName: string; AResName: PChar;
+//  ARequestedIconSize: TPoint; ARequestedIconBPP: Integer): HICON;
 function abfGetIconFromLibraryW(const ALibFileName: WideString;
   AResName: PWideChar; ARequestedIconSize: TPoint;
   ARequestedIconBPP: Integer): HICON;
@@ -197,7 +197,7 @@ function abfGetIconFromLibraryW(const ALibFileName: WideString;
 function abfLoadIconFromInstanceA(AInstance: HINST; AResName: PAnsiChar;
   ARequestedIconSize: TPoint; ARequestedIconBPP: Integer;
   AOutputIcon: TIcon): Boolean;
-function abfLoadIconFromInstance(AInstance: HINST; AResName: PChar;
+function abfLoadIconFromInstance(AInstance: HINST; AResName: PAnsiChar;
   ARequestedIconSize: TPoint; ARequestedIconBPP: Integer;
   AOutputIcon: TIcon): Boolean;
 function abfLoadIconFromInstanceW(AInstance: HINST; AResName: PWideChar;
@@ -212,9 +212,9 @@ function abfLoadIconFromInstanceW(AInstance: HINST; AResName: PWideChar;
 function abfLoadIconFromLibraryA(const ALibFileName: AnsiString;
   AResName: PAnsiChar; ARequestedIconSize: TPoint; ARequestedIconBPP: Integer;
   AOutputIcon: TIcon): Boolean;
-function abfLoadIconFromLibrary(const ALibFileName: string; AResName: PChar;
-  ARequestedIconSize: TPoint; ARequestedIconBPP: Integer;
-  AOutputIcon: TIcon): Boolean;
+//function abfLoadIconFromLibrary(const ALibFileName: string; AResName: PChar;
+  //ARequestedIconSize: TPoint; ARequestedIconBPP: Integer;
+  //AOutputIcon: TIcon): Boolean;
 function abfLoadIconFromLibraryW(const ALibFileName: WideString;
   AResName: PWideChar; ARequestedIconSize: TPoint; ARequestedIconBPP: Integer;
   AOutputIcon: TIcon): Boolean;
@@ -647,20 +647,23 @@ end;
 
 function abfGetIconFromInstanceA(AInstance: HINST; AResName: PAnsiChar;
   ARequestedIconSize: TPoint; ARequestedIconBPP: Integer): HICON;
+var
+  b: HRSRC;
 begin
+  b := FindResourceA(AInstance, AResName, PAnsiChar(RT_GROUP_ICON));
   Result := _GetIconFromInstance(AInstance,
-    FindResource(AInstance, AResName, RT_GROUP_ICON), ARequestedIconSize,
+    b, ARequestedIconSize,
     ARequestedIconBPP);
 end;
 
 //------------------------------------------------------------------------------
 
-function abfGetIconFromInstance(AInstance: HINST; AResName: PChar;
+{function abfGetIconFromInstance(AInstance: HINST; AResName: PAnsiChar;
   ARequestedIconSize: TPoint; ARequestedIconBPP: Integer): HICON;
 begin
   Result := abfGetIconFromInstanceA(AInstance, AResName, ARequestedIconSize,
     ARequestedIconBPP);
-end;
+end;}
 
 //------------------------------------------------------------------------------
 
@@ -713,12 +716,12 @@ end;
 
 //------------------------------------------------------------------------------
 
-function abfGetIconFromLibrary(const ALibFileName: string; AResName: PChar;
+{function abfGetIconFromLibrary(const ALibFileName: string; AResName: PChar;
   ARequestedIconSize: TPoint; ARequestedIconBPP: Integer): HICON;
 begin
   Result := abfGetIconFromLibraryA(ALibFileName, AResName,
     ARequestedIconSize, ARequestedIconBPP);
-end;
+end;}
 
 //------------------------------------------------------------------------------
 
@@ -773,7 +776,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-function abfLoadIconFromInstance(AInstance: HINST; AResName: PChar;
+function abfLoadIconFromInstance(AInstance: HINST; AResName: PAnsiChar;
   ARequestedIconSize: TPoint; ARequestedIconBPP: Integer;
   AOutputIcon: TIcon): Boolean;
 begin
@@ -829,13 +832,13 @@ end;
 
 //------------------------------------------------------------------------------
 
-function abfLoadIconFromLibrary(const ALibFileName: string; AResName: PChar;
+{function abfLoadIconFromLibrary(const ALibFileName: string; AResName: PChar;
   ARequestedIconSize: TPoint; ARequestedIconBPP: Integer;
   AOutputIcon: TIcon): Boolean;
 begin
   Result := abfLoadIconFromLibraryA(ALibFileName, AResName,
     ARequestedIconSize, ARequestedIconBPP, AOutputIcon);
-end;
+end;}
 
 //------------------------------------------------------------------------------
 

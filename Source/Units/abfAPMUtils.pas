@@ -526,12 +526,17 @@ var
 
 function CallNtPowerInformation;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'CallNtPowerInformation', _CallNtPowerInformation);
   asm
     mov esp, ebp
     pop ebp
     jmp [_CallNtPowerInformation]
   end;
+{$ELSE}
+  Result := CallNTPowerInformation(TPowerInformationLevel(11), nil, 0, lpOutputBuffer, OutputBufferSize);
+  //_CallNtPowerInformation
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -541,12 +546,15 @@ var
 
 function DeletePwrScheme;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'DeletePwrScheme', _DeletePwrScheme);
   asm
     mov esp, ebp
     pop ebp
     jmp [_DeletePwrScheme]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -556,12 +564,15 @@ var
 
 function EnumPwrSchemes;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'EnumPwrSchemes', _EnumPwrSchemes);
   asm
     mov esp, ebp
     pop ebp
     jmp [_EnumPwrSchemes]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -571,6 +582,7 @@ var
 
 function GetActivePwrScheme;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'GetActivePwrScheme', _GetActivePwrScheme);
   if not Assigned(_GetActivePwrScheme) then Exit;
   asm
@@ -578,6 +590,8 @@ begin
     pop ebp
     jmp [_GetActivePwrScheme]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -587,6 +601,7 @@ var
 
 function GetCurrentPowerPolicies;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'GetCurrentPowerPolicies', _GetCurrentPowerPolicies);
   if not Assigned(_GetCurrentPowerPolicies) then Exit;
   asm
@@ -594,6 +609,8 @@ begin
     pop ebp
     jmp [_GetCurrentPowerPolicies]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -603,6 +620,7 @@ var
 
 function GetPwrCapabilities;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'GetPwrCapabilities', _GetPwrCapabilities);
   if not Assigned(_GetPwrCapabilities) then Exit;
   asm
@@ -610,6 +628,8 @@ begin
     pop ebp
     jmp [_GetPwrCapabilities]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -619,6 +639,7 @@ var
 
 function GetPwrDiskSpindownRange;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'GetPwrDiskSpindownRange', _GetPwrDiskSpindownRange);
   if not Assigned(_GetPwrDiskSpindownRange) then Exit;
   asm
@@ -626,6 +647,8 @@ begin
     pop ebp
     jmp [_GetPwrDiskSpindownRange]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -635,6 +658,7 @@ var
 
 function IsPwrHibernateAllowed;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'IsPwrHibernateAllowed', _IsPwrHibernateAllowed);
   if not Assigned(_IsPwrHibernateAllowed) then Exit;
   asm
@@ -642,6 +666,8 @@ begin
     pop ebp
     jmp [_IsPwrHibernateAllowed]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -651,6 +677,7 @@ var
 
 function IsPwrShutdownAllowed;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'IsPwrShutdownAllowed', _IsPwrShutdownAllowed);
   if not Assigned(_IsPwrShutdownAllowed) then Exit;
   asm
@@ -658,6 +685,8 @@ begin
     pop ebp
     jmp [_IsPwrShutdownAllowed]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -667,6 +696,7 @@ var
 
 function IsPwrSuspendAllowed;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'IsPwrSuspendAllowed', _IsPwrSuspendAllowed);
   if not Assigned(_IsPwrSuspendAllowed) then Exit;
   asm
@@ -674,6 +704,8 @@ begin
     pop ebp
     jmp [_IsPwrSuspendAllowed]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -683,6 +715,7 @@ var
 
 function ReadGlobalPwrPolicy;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'ReadGlobalPwrPolicy', _ReadGlobalPwrPolicy);
   if not Assigned(_ReadGlobalPwrPolicy) then Exit;
   asm
@@ -690,6 +723,8 @@ begin
     pop ebp
     jmp [_ReadGlobalPwrPolicy]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -699,6 +734,7 @@ var
 
 function ReadPwrScheme;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'ReadPwrScheme', _ReadPwrScheme);
   if not Assigned(_ReadPwrScheme) then Exit;
   asm
@@ -706,6 +742,8 @@ begin
     pop ebp
     jmp [_ReadPwrScheme]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -715,6 +753,7 @@ var
 
 function SetActivePwrScheme;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'SetActivePwrScheme', _SetActivePwrScheme);
   if not Assigned(_SetActivePwrScheme) then Exit;
   asm
@@ -722,6 +761,8 @@ begin
     pop ebp
     jmp [_SetActivePwrScheme]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -731,6 +772,7 @@ var
 
 function SetSuspendState;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'SetSuspendState', _SetSuspendState);
   if not Assigned(_SetSuspendState) then Exit;
   asm
@@ -738,6 +780,8 @@ begin
     pop ebp
     jmp [_SetSuspendState]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -747,6 +791,7 @@ var
 
 function WriteGlobalPwrPolicy;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'WriteGlobalPwrPolicy', _WriteGlobalPwrPolicy);
   if not Assigned(_WriteGlobalPwrPolicy) then Exit;
   asm
@@ -754,6 +799,8 @@ begin
     pop ebp
     jmp [_WriteGlobalPwrPolicy]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -763,6 +810,7 @@ var
 
 function WritePwrScheme;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(powrprof, 'WritePwrScheme', _WritePwrScheme);
   if not Assigned(_WritePwrScheme) then Exit;
   asm
@@ -770,6 +818,8 @@ begin
     pop ebp
     jmp [_WritePwrScheme]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -779,6 +829,7 @@ var
 
 function SetThreadExecutionState;
 begin
+{$IFDEF WIN32}
   _SetProcAddr(kernel32, 'SetThreadExecutionState', _SetThreadExecutionState);
   if not Assigned(_SetThreadExecutionState) then Exit;
   asm
@@ -786,6 +837,8 @@ begin
     pop ebp
     jmp [_SetThreadExecutionState]
   end;
+{$ELSE}
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------

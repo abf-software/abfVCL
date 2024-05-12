@@ -996,10 +996,22 @@ end;
 
 procedure abfParseComplexPropertyName(const PropName: string; var CurrPropName,
   NextPropName: string);
+{$IFDEF D9}
+var
+  a: widestring;
+{$ELSE}
+  a: string;
+{$ENDIF}
 begin
   CurrPropName := abfFixComplexPropertyName(PropName);
   NextPropName := CurrPropName;
-  abfDeleteAfterChar(CurrPropName, '.');
+{$IFDEF D9}
+  a := CurrPropName;
+  abfDeleteAfterCharW(a, '.');
+  CurrPropName := a;
+{$ELSE}
+  abfDeleteAfterCharA(CurrPropName, '.');
+{$ENDIF}
   Delete(NextPropName, 1, Length(CurrPropName));
   NextPropName := abfFixComplexPropertyName(NextPropName);
 end;

@@ -432,7 +432,7 @@ begin
   Result := False;
   S := abfRemoveSlash(DirName);
   if not abfDirectoryExists(S) then Exit;
-  Result := WinExec(PChar('rundll32 appwiz.cpl,NewLinkHere ' + S + '\'),
+  Result := WinExec(PAnsiChar('rundll32 appwiz.cpl,NewLinkHere ' + S + '\'),
     SW_SHOWNORMAL) > 31;
 end;
 

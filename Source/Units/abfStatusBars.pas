@@ -1672,7 +1672,13 @@ begin
   if FSimplePanel then
   begin
     if FSimpleText <> '' then
+{$IFDEF WIN32}
       SendMessage(Handle, SB_SETTEXT, 255, Integer(PChar(FSimpleText)));
+{$ENDIF}
+{$IFDEF WIN64}
+      SendMessage(Handle, SB_SETTEXT, 255, NativeInt(PChar(FSimpleText)));
+{$ENDIF}
+
     SendMessage(Handle, SB_SIMPLE, 1, 0);
   end;
 
@@ -1769,11 +1775,19 @@ procedure TabfStatusBar.DrawPanel(Panel: TabfStatusPanel; const Rect: TRect);
 begin
   if Panel.PanelStyle = apsOwnerDraw then
   begin
+{$IFDEF WIN32}
     if not Boolean(SendMessage(Handle, SB_GETRECT, Panel.Index,
       Integer(@Panel.FLastRect))) then
       Panel.FLastRect := Rect
     else
       InflateRect(Panel.FLastRect, -1, -1);
+{$ELSE}
+    if not Boolean(SendMessage(Handle, SB_GETRECT, Panel.Index,
+      NativeInt(@Panel.FLastRect))) then
+      Panel.FLastRect := Rect
+    else
+      InflateRect(Panel.FLastRect, -1, -1);
+{$ENDIF}
 
   {$IfDef D4}
     if Panel.UseRightToLeftReading then
@@ -1793,8 +1807,13 @@ begin
 
   end else
   begin
+{$IFDEF WIN32}
     if Boolean(SendMessage(Handle, SB_GETRECT, Panel.Index,
       Integer(@Panel.FLastRect))) then
+{$ELSE}
+    if Boolean(SendMessage(Handle, SB_GETRECT, Panel.Index,
+      NativeInt(@Panel.FLastRect))) then
+{$ENDIF}
     begin
     {$IfDef D4}
       if Panel.UseRightToLeftReading then
@@ -2186,8 +2205,14 @@ begin
     if not Repaint then
     begin
       FUpdateNeeded := True;
+{$IFDEF WIN32}
       SendMessage(Handle, SB_GETRECT, Index, Integer(@FLastRect));
       InvalidateRect(Handle, @FLastRect, True);
+{$ENDIF}
+{$IFDEF WIN64}
+      SendMessage(Handle, SB_GETRECT, Index, NativeInt(@FLastRect));
+      InvalidateRect(Handle, @FLastRect, True);
+{$ENDIF}
       Exit;
     end else
     if not FUpdateNeeded then Exit;
@@ -2214,7 +2239,13 @@ begin
       end;
 {$EndIf D4}
 
+{$IFDEF WIN32}
     SendMessage(Handle, SB_SETTEXT, Index or Flags, Integer(PChar(S)));
+{$ENDIF}
+{$IFDEF WIN64}
+    SendMessage(Handle, SB_SETTEXT, Index or Flags, NativeInt(PChar(S)));
+{$ENDIF}
+
   end;
 end;
 
@@ -2236,8 +2267,14 @@ begin
     if Count = 0 then
     begin
       PanelEdges[0] := -1;
+{$IFDEF WIN32}
       SendMessage(Handle, SB_SETPARTS, 1, Integer(@PanelEdges));
       SendMessage(Handle, SB_SETTEXT, 0, Integer(PChar('')));
+{$ENDIF}
+{$IFDEF WIN64}
+      SendMessage(Handle, SB_SETPARTS, 1, NativeInt(@PanelEdges));
+      SendMessage(Handle, SB_SETTEXT, 0, NativeInt(PChar('')));
+{$ENDIF}
     end else
     begin
       PanelPos := 0;
@@ -2247,7 +2284,12 @@ begin
         PanelEdges[i] := PanelPos;
       end;
       PanelEdges[Count - 1] := -1;
+{$IFDEF WIN32}
       SendMessage(Handle, SB_SETPARTS, Count, Integer(@PanelEdges));
+{$ENDIF}
+{$IFDEF WIN64}
+      SendMessage(Handle, SB_SETPARTS, Count, NativeInt(@PanelEdges));
+{$ENDIF}
     end;
   end;
 
@@ -2278,9 +2320,16 @@ begin
   if not HandleAllocated then Exit;
   FCanvas.Brush.Color := Color;
   FCanvas.Brush.Style := bsSolid;
+{$IFDEF WIN32}
   SendMessage(Handle, SB_SETTEXT, 255
    {$IfDef D4}or RTLREADING[UseRightToLeftReading]{$EndIf},
    Integer(PChar(FSimpleText)));
+{$ENDIF}
+{$IFDEF WIN64}
+  SendMessage(Handle, SB_SETTEXT, 255
+   {$IfDef D4}or RTLREADING[UseRightToLeftReading]{$EndIf},
+   NativeInt(PChar(FSimpleText)));
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -2430,7 +2479,12 @@ var
   HintInfo: ^THintInfo;
 begin
   inherited;
+{$IFDEF WIN32}
   Integer(HintInfo) := Message.LParam;
+{$ENDIF}
+{$IFDEF WIN64}
+  NativeInt(HintInfo) := Message.LParam;
+{$ENDIF}
 {$IfNDef D3}
   HintInfo^.HintPos := ClientToScreen(HintInfo^.CursorPos);
   HintInfo^.HintPos.y := HintInfo^.HintPos.y + HintInfo^.CursorRect.Bottom -

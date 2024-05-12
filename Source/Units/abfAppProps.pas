@@ -287,8 +287,14 @@ type
     procedure DoDeactivate(Sender: TObject);
     procedure DoException(Sender: TObject; E: Exception);
     procedure DoIdle(Sender: TObject; var Done: Boolean);
+{$IFDEF D9}
+    function DoHelp(Command: Word; Data: NativeInt;
+      var CallHelp: Boolean): Boolean;
+{$ELSE}
     function DoHelp(Command: Word; Data: Longint;
       var CallHelp: Boolean): Boolean;
+{$ENDIF}
+
     procedure DoHint(Sender: TObject);
     procedure DoMessage(var Msg: TMsg; var Handled: Boolean);
     procedure DoMinimize(Sender: TObject);
@@ -371,7 +377,9 @@ begin
   Application.OnDeactivate := DoDeactivate;
   Application.OnException := DoException;
   Application.OnIdle := DoIdle;
+{$IFDEF D9}
   Application.OnHelp := DoHelp;
+{$ENDIF}
   Application.OnHint := DoHint;
   Application.OnMessage := DoMessage;
   Application.OnMinimize := DoMinimize;
@@ -519,7 +527,11 @@ end;
 
 //------------------------------------------------------------------------------
 
+{$IFDEF D9}
+function TabfAppPropList.DoHelp(Command: Word; Data: NativeInt; var CallHelp: Boolean): Boolean;
+{$ELSE}
 function TabfAppPropList.DoHelp(Command: Word; Data: Longint; var CallHelp: Boolean): Boolean;
+{$ENDIF}
 var
   i: Integer;
 begin

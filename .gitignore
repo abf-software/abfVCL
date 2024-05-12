@@ -1,0 +1,10 @@
+﻿*.dcu
+Source/Units/__history
+*.local
+*.identcache
+*.skincfg
+*.dsk
+__history
+*.rsm
+*.dcu
+*.~dsk

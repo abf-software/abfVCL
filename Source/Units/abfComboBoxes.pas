@@ -1,4 +1,4 @@
-{*******************************************************************************
+﻿{*******************************************************************************
 
   ABF Visual Components Library
 
@@ -1278,9 +1278,15 @@ end;
 
 //------------------------------------------------------------------------------
 
+{$IFDEF WIN32}
 function _EnumFontsProc(var EnumLogFont: TEnumLogFont;
   var TextMetric: TNewTextMetric; FontType: Integer; Data: LPARAM): Integer;
   export; stdcall;
+{$ELSE}
+function _EnumFontsProc(var EnumLogFont: TEnumLogFont;
+  var TextMetric: TNewTextMetric; FontType: Integer; Data: LPARAM): NativeInt;
+  export; stdcall;
+{$ENDIF}
 var
   FaceName: string;
 begin
@@ -1418,7 +1424,11 @@ var
 
   procedure _InitScreen;
   begin
+    {$IFDEF WIN32}
     EnumFontFamilies(DC, nil, @_EnumFontsProc, Longint(Self));
+    {$ELSE}
+    EnumFontFamilies(DC, nil, @_EnumFontsProc, NativeInt(Self));
+    {$ENDIF}
   end;{Internal procedure _InitScreen}
 
   //-----------------------------------
@@ -1426,7 +1436,11 @@ var
   procedure _InitPrinter;
   begin
     try
+    {$IFDEF WIN32}
       EnumFontFamilies(Printer.Handle, nil, @_EnumFontsProc, Longint(Self));
+    {$ELSE}
+      EnumFontFamilies(Printer.Handle, nil, @_EnumFontsProc, NativeInt(Self));
+    {$ENDIF}
     except
     end;
   end;{Internal procedure _InitPrinter}
@@ -1650,8 +1664,14 @@ end;
 
 //------------------------------------------------------------------------------
 
+{$IFDEF WIN32}
 function _EnumFontsBySize(var LogFont: TEnumLogFont; var ptm: TNewTextMetric;
   FontType: Integer; Data: Pointer): Integer; stdcall;
+{$ENDIF}
+{$IFDEF WIN64}
+function _EnumFontsBySize(var LogFont: TEnumLogFont; var ptm: TNewTextMetric;
+  FontType: Integer; Data: Pointer): NativeInt; stdcall;
+{$ENDIF}
 var
  Str: string;
  i, Height: Integer;
@@ -1728,7 +1748,11 @@ var
     DC := GetDC(0);
     try
       Str := FontName;
+      {$IFDEF WIN32}
       EnumFontFamilies(DC, PChar(Str), @_EnumFontsBySize, LongInt(Items));
+      {$ELSE}
+      EnumFontFamilies(DC, PChar(Str), @_EnumFontsBySize, NativeInt(Items));
+      {$ENDIF}
     finally
       ReleaseDC(0, DC);
     end;

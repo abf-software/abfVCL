@@ -209,6 +209,27 @@ const
 {$IfDef D9_ONLY}SDelphi = 'Delphi 2005'; {$EndIf}
 {$IfDef D10_ONLY}SDelphi = 'Delphi 2006'; {$EndIf}
 {$IfDef D11_ONLY}SDelphi = 'Delphi 2007'; {$EndIf}
+
+{$IfDef D12_ONLY}SDelphi = 'Delphi 2009'; {$EndIf}
+{$IfDef D13_ONLY}SDelphi = 'Delphi 2010'; {$EndIf}
+{$IfDef D14_ONLY}SDelphi = 'Delphi XE'; {$EndIf}
+{$IfDef D15_ONLY}SDelphi = 'Delphi XE2'; {$EndIf}
+{$IfDef D16_ONLY}SDelphi = 'Delphi XE3'; {$EndIf}
+{$IfDef D17_ONLY}SDelphi = 'Delphi XE4'; {$EndIf}
+{$IfDef D18_ONLY}SDelphi = 'Delphi XE5'; {$EndIf}
+{$IfDef D19_ONLY}SDelphi = 'Delphi XE6'; {$EndIf}
+{$IfDef D20_ONLY}SDelphi = 'Delphi XE7'; {$EndIf}
+{$IfDef D21_ONLY}SDelphi = 'Delphi XE8'; {$EndIf}
+{$IfDef D22_ONLY}SDelphi = 'Delphi XE10 (Seattle)'; {$EndIf}
+{$IfDef D23_ONLY}SDelphi = 'Delphi XE10 (Berlin)'; {$EndIf}
+{$IfDef D24_ONLY}SDelphi = 'Delphi XE10 (Rio)'; {$EndIf}
+{$IfDef D25_ONLY}SDelphi = 'Delphi XE10 (Sydney)'; {$EndIf}
+{$IfDef D26_ONLY}SDelphi = 'Delphi XE11.3 (Alexandra'; {$EndIf}
+{$IfDef D27_ONLY}SDelphi = 'Delphi XE112'; {$EndIf}
+{$IfDef D28_ONLY}SDelphi = 'Delphi XE12.1'; {$EndIf}
+{$IfDef D29_ONLY}SDelphi = 'Delphi XE12.2 (ModernX)'; {$EndIf}
+{$IfDef D30_ONLY}SDelphi = 'Delphi XE12.3 (ModernX2)'; {$EndIf}
+
 {$IfDef C1_ONLY}SDelphi = 'C++Builder 1';{$EndIf}
 {$IfDef C3_ONLY}SDelphi = 'C++Builder 3';{$EndIf}
 {$IfDef C4_ONLY}SDelphi = 'C++Builder 4';{$EndIf}
@@ -216,6 +237,7 @@ const
 {$IfDef C6_ONLY}SDelphi = 'C++Builder 6';{$EndIf}
 {$IfDef C10_ONLY}SDelphi = 'C++Builder 2006';{$EndIf}
 {$IfDef C11_ONLY}SDelphi = 'C++Builder 2007';{$EndIf}
+{$IfDef C35_ONLY}SDelphi = 'C++Builder 2007';{$EndIf}
 begin
   Result := Format(SSubject, [ComponentName, SabfVCLVersion, SDelphi]);
 end;

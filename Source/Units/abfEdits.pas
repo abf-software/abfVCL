@@ -1217,7 +1217,11 @@ begin
         R := Rect(3, 0, ClientWidth - ButtonWidth - 2, ClientHeight + 1)
       else
         R := Rect(ButtonWidth + 2, 0, ClientWidth - 3, ClientHeight + 1);
+{$IFDEF WIN32}
       SendMessage(Handle, EM_SETRECTNP, 0, LongInt(@R))
+{$ELSE}
+      SendMessage(Handle, EM_SETRECTNP, 0, NativeInt(@R))
+{$ENDIF}
     end else
       SendMessage(Handle, EM_SETRECTNP, 0, 0);
 

@@ -390,7 +390,7 @@ begin
     TempFlag := TempFlag or KF_FLAG_CREATE;
 
   TempPath := nil;
-  if not Succeeded(SHGetKnownFolderPath(@AKFID, TempFlag, 0, TempPath)) then Exit;
+  if not Succeeded(SHGetKnownFolderPath(AKFID, TempFlag, 0, TempPath)) then Exit;
   try
     Result := WideString(TempPath);
   finally

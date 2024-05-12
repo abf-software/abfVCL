@@ -15,7 +15,7 @@ unit abfRegistry;
 interface
 
 uses
-  Windows, Classes, Registry, SysUtils;
+  Windows, Classes, Registry, SysUtils, System.SysConst;
 
 const
 (*
@@ -76,6 +76,10 @@ type
 
 const
   cAllValueType = [rdString..High(TabfRegDataType)];
+{$IFDEF D9}
+resourcestring
+  SRegGetDataFailed = 'Registry Data Failed %s';
+{$ENDIF}
 
 type
   TabfRegRootKey = (rrkClassesRoot, rrkCurrentUser, rrkLocalMachine, rrkUsers,

@@ -827,7 +827,7 @@ function abfGetLongPathNameW(const AShortPathName: WideString): WideString;
 // Retrieves the path of the system directory used by WOW64.
 // This directory is not present on 32-bit Windows.
 function abfGetSystemWow64DirectoryA: AnsiString;
-function abfGetSystemWow64Directory: string;
+function abfGetSystemWow64Directory: ansistring;
 function abfGetSystemWow64DirectoryW: WideString;
 
 //------------------------------------------------------------------------------
@@ -904,7 +904,7 @@ function abfCreateDirectoryW(const ADirName: WideString): Boolean;
 //------------------------------------------------------------------------------
 // Adds a directory to the search path used to locate DLLs for the application.
 function abfSetDllDirectoryA(ADirName: PAnsiChar): Boolean;
-function abfSetDllDirectory(ADirName: PChar): Boolean;
+function abfSetDllDirectory(ADirName: PAnsiChar): Boolean;
 function abfSetDllDirectoryW(ADirName: PWideChar): Boolean;
 
 //------------------------------------------------------------------------------
@@ -1676,6 +1676,7 @@ end;
 // Raise base to an integral power. Very fast. Same as Borland's routine
 
 function IntPower(Base: Extended; Exponent: Integer): Extended;
+{$IFDEF WIN32}
 asm
         mov     ecx, eax
         cdq
@@ -1697,6 +1698,12 @@ asm
         fdivrp                    { Result := 1 / Result }
 @@3:
         fwait
+{$ENDIF}
+{$IFDEF WIN64}
+begin
+
+//end;
+{$ENDIF}
 end;
 
 //------------------------------------------------------------------------------
@@ -1851,6 +1858,7 @@ var
 begin
   OldMode := SetErrorMode(AErrorMode);
   try
+    {$IFDEF WIN32}
     asm
       FNSTCW  FPUControlWord
     end;
@@ -1862,6 +1870,12 @@ begin
         FLDCW FPUControlWord
       end;
     end;
+    {$ELSE}
+    try
+      Result := abfLoadLibraryA(AFilename);
+    finally
+    end;
+    {$ENDIF}
   finally
     SetErrorMode(OldMode);
   end;
@@ -1885,6 +1899,7 @@ var
 begin
   OldMode := SetErrorMode(AErrorMode);
   try
+    {$IFDEF WIN32}
     asm
       FNSTCW  FPUControlWord
     end;
@@ -1896,6 +1911,13 @@ begin
         FLDCW FPUControlWord
       end;
     end;
+    {$ENDIF}
+    {$IFDEF WIN64}
+    try
+      Result := abfLoadLibraryW(AFilename);
+    finally
+    end;
+    {$ENDIF}
   finally
     SetErrorMode(OldMode);
   end;
@@ -2964,32 +2986,32 @@ var
   SaveFormat: string;
 begin
 // Fix separators
-  abfReplaceChars(S, '/', DateSeparator);
-  abfReplaceChars(S, '\', DateSeparator);
-  abfReplaceChars(S, ' ', DateSeparator);
-  abfReplaceChars(S, ':', DateSeparator);
-  abfReplaceChars(S, '-', DateSeparator);
+  abfReplaceChars(S, '/', {$IFDEF DFMT}FormatSettings.{$ENDIF}DateSeparator);
+  abfReplaceChars(S, '\', {$IFDEF DFMT}FormatSettings.{$ENDIF}DateSeparator);
+  abfReplaceChars(S, ' ', {$IFDEF DFMT}FormatSettings.{$ENDIF}DateSeparator);
+  abfReplaceChars(S, ':', {$IFDEF DFMT}FormatSettings.{$ENDIF}DateSeparator);
+  abfReplaceChars(S, '-', {$IFDEF DFMT}FormatSettings.{$ENDIF}DateSeparator);
 
 // Fix the case when there is no separator in format
   i := Length(Format);
-  if (Pos(DateSeparator, Format) < 1) and (Pos(DateSeparator, S) < 1) then
+  if (Pos({$IFDEF DFMT}FormatSettings.{$ENDIF}DateSeparator, Format) < 1) and (Pos({$IFDEF DFMT}FormatSettings.{$ENDIF}DateSeparator, S) < 1) then
     while i > 1 do
     begin
       if Format[i] <> Format[i - 1] then
       begin
-        Insert(DateSeparator, Format, i);
-        Insert(DateSeparator, S, i);
+        Insert({$IFDEF DFMT}FormatSettings.{$ENDIF}DateSeparator, Format, i);
+        Insert({$IFDEF DFMT}FormatSettings.{$ENDIF}DateSeparator, S, i);
       end;
       Dec(i);
     end;
 
 // Temporary change format and convert
-  SaveFormat := ShortDateFormat;
+  SaveFormat := {$IFDEF DFMT}FormatSettings.{$ENDIF}ShortDateFormat;
   try
-    ShortDateFormat := Format;
+    {$IFDEF DFMT}FormatSettings.{$ENDIF}ShortDateFormat := Format;
     Result := StrToDate(S);
   finally
-    ShortDateFormat := SaveFormat;
+    {$IFDEF DFMT}FormatSettings.{$ENDIF}ShortDateFormat := SaveFormat;
   end;
 end;
 
@@ -3002,32 +3024,32 @@ var
   SaveFormat: string;
 begin
 // Fix separators
-  abfReplaceChars(S, '/', TimeSeparator);
-  abfReplaceChars(S, '\', TimeSeparator);
-  abfReplaceChars(S, ' ', TimeSeparator);
-  abfReplaceChars(S, ':', TimeSeparator);
-  abfReplaceChars(S, '-', TimeSeparator);
+  abfReplaceChars(S, '/', {$IFDEF DFMT}FormatSettings.{$ENDIF}TimeSeparator);
+  abfReplaceChars(S, '\', {$IFDEF DFMT}FormatSettings.{$ENDIF}TimeSeparator);
+  abfReplaceChars(S, ' ', {$IFDEF DFMT}FormatSettings.{$ENDIF}TimeSeparator);
+  abfReplaceChars(S, ':', {$IFDEF DFMT}FormatSettings.{$ENDIF}TimeSeparator);
+  abfReplaceChars(S, '-', {$IFDEF DFMT}FormatSettings.{$ENDIF}TimeSeparator);
 
 // Fix the case when there is no separator in format
   i := Length(Format);
-  if (Pos(TimeSeparator, Format) < 1) and (Pos(DateSeparator, S) < 1) then
+  if (Pos({$IFDEF DFMT}FormatSettings.{$ENDIF}TimeSeparator, Format) < 1) and (Pos({$IFDEF DFMT}FormatSettings.{$ENDIF}DateSeparator, S) < 1) then
     while i > 1 do
     begin
       if Format[i] <> Format[i - 1] then
       begin
-        Insert(TimeSeparator, Format, i);
-        Insert(TimeSeparator, S, i);
+        Insert({$IFDEF DFMT}FormatSettings.{$ENDIF}TimeSeparator, Format, i);
+        Insert({$IFDEF DFMT}FormatSettings.{$ENDIF}TimeSeparator, S, i);
       end;
       Dec(i);
     end;
 
 // Temporary change format and convert
-  SaveFormat := ShortTimeFormat;
+  SaveFormat := {$IFDEF DFMT}FormatSettings.{$ENDIF}ShortTimeFormat;
   try
-    ShortTimeFormat := Format;
+    {$IFDEF DFMT}FormatSettings.{$ENDIF}ShortTimeFormat := Format;
     Result := StrToTime(S);
   finally
-    ShortTimeFormat := SaveFormat;
+    {$IFDEF DFMT}FormatSettings.{$ENDIF}ShortTimeFormat := SaveFormat;
   end;
 end;
 
@@ -3155,7 +3177,9 @@ begin
   n := Length(AHex) div 2;
   SetLength(Result, n);
   for i := 0 to n - 1 do
-    HexToBin(@AHex[(i * 2) + 1], @Result[i], 1);
+  begin
+    //!!HexToBin(@AHex[(i * 2) + 1], @Result[i], 1);
+  end;
 end;
 
 //------------------------------------------------------------------------------
@@ -3700,7 +3724,7 @@ end;
 
 function abfGetDriveFileSystem(ADrive: Char): TabfFileSystem;
 begin
-  Result := abfGetDriveFileSystemA(ADrive);
+  Result := abfGetDriveFileSystem(ADrive);
 end;
 
 //------------------------------------------------------------------------------
@@ -3713,7 +3737,7 @@ var
 begin
   if not IsWinNT then
   begin
-    Result := abfGetDriveFileSystemA(Char(ADrive));
+    Result := abfGetDriveFileSystem(Char(ADrive));
     Exit;
   end;
 
@@ -4011,8 +4035,13 @@ begin
   if ADrive = '' then Exit;
   if not (ADrive[1] in ['A'..'Z']) then Exit;
 
+{$IFDEF D9}
+  hDevice := CreateFileW(PChar( '\\.\VWIN32'), 0, 0, nil, 0,
+    FILE_FLAG_DELETE_ON_CLOSE, 0 );
+{$ELSE}
   hDevice := CreateFileA(PChar( '\\.\VWIN32'), 0, 0, nil, 0,
     FILE_FLAG_DELETE_ON_CLOSE, 0 );
+{$ENDIF}
 
   if hDevice = INVALID_HANDLE_VALUE then Exit;
   try
@@ -4942,7 +4971,7 @@ end;
 // Command line routines.
 //==============================================================================
 
-function _GetNextParamStrA(P: PChar; var Param: AnsiString): PAnsiChar;
+function _GetNextParamStrA(P: PAnsiChar; var Param: AnsiString): PAnsiChar;
 var
   i, Len: Integer;
   Start, S, Q: PAnsiChar;
@@ -5343,7 +5372,7 @@ end;
 
 //------------------------------------------------------------------------------
 
-function abfSetDllDirectory(ADirName: PChar): Boolean;
+function abfSetDllDirectory(ADirName: PAnsiChar): Boolean;
 begin
   Result := abfSetDllDirectoryA(ADirName);
 end;
@@ -6097,7 +6126,7 @@ end;
 // Unicode version added 07/09/2007
 
 function abfExpandRelativeFileNameExA(const BasePath,
-  RelativeFileName: AnsiString): string;
+  RelativeFileName: AnsiString): ansistring;
 var
   TempFileName: AnsiString;
 begin
@@ -7340,7 +7369,7 @@ begin
   with F do
   begin
     while FindData.dwFileAttributes and ExcludeAttr <> 0 do
-      if not FindNextFile(FindHandle, FindData) then
+      if not FindNextFileA(FindHandle, FindData) then
       begin
         Result := GetLastError;
         Exit;
@@ -8764,7 +8793,12 @@ begin
 
         //now walk the string table
         for i := 0 to TempID - 1 do
+{$IFDEF WIN32}
           Inc(DWORD(TablePos), SizeOf(TablePos^[0]) * (TablePos^[0] + 1));
+{$ENDIF}
+{$IFDEF WIN64}
+          Inc(NativeInt(TablePos), SizeOf(TablePos^[0]) * (TablePos^[0] + 1));
+{$ENDIF}
 
         SetLength(Result, TablePos^[0]);
         Move(TablePos^[1], Result[1], SizeOf(TablePos^[0]) * TablePos^[0]);

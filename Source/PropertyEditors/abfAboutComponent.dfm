@@ -12,10 +12,8 @@ object frmAboutComponent: TfrmAboutComponent
   Font.Height = -13
   Font.Name = 'Arial'
   Font.Style = [fsBold]
-  OldCreateOrder = True
   Scaled = False
   OnMouseMove = FormMouseMove
-  PixelsPerInch = 96
   TextHeight = 16
   object lbBy: TLabel
     Left = 162
@@ -68,7 +66,7 @@ object frmAboutComponent: TfrmAboutComponent
   object lbSupport: TLabel
     Left = 264
     Top = 174
-    Width = 83
+    Width = 82
     Height = 16
     Caption = 'xxx@yyy.zzz'
     Transparent = True
@@ -88,7 +86,7 @@ object frmAboutComponent: TfrmAboutComponent
   object lbWeb: TLabel
     Left = 264
     Top = 198
-    Width = 83
+    Width = 82
     Height = 16
     Caption = 'www.yyy.zzz'
     Transparent = True
@@ -104,7 +102,7 @@ object frmAboutComponent: TfrmAboutComponent
     Height = 21
     Alignment = taCenter
     AutoSize = False
-    Caption = 'Copyright ©'
+    Caption = 'Copyright '#169
   end
   object bvBottom: TBevel
     Left = 0
